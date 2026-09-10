@@ -1,0 +1,7 @@
+[Glove80]
+; Copy to settings.ini. Read these IDs in AutoHotInterception's Monitor.ahk.
+; Only this exact keyboard is intercepted. Do not use the laptop's IDs.
+VID=0x0000
+PID=0x0000
+; Swap the Command and Control thumb roles on Glove80 only.
+SwapThumbs=1

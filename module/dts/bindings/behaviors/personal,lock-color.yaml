@@ -1,0 +1,8 @@
+description: Layer switch color, red when its layer is locked
+compatible: "personal,lock-color"
+include: two_param.yaml
+properties:
+  locked-color:
+    type: int
+    required: true
+    description: RGB color of a locked layer switch, generated from the shared palette

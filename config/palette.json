@@ -1,0 +1,1731 @@
+{
+  "roles": {
+    "blank": {
+      "rgb": "#000000",
+      "background": "#1e2030",
+      "foreground": "#cad3f5",
+      "label": "Disabled",
+      "color_name": "Unlit"
+    },
+    "alpha": {
+      "rgb": "#8bd5ca",
+      "background": "#8bd5ca",
+      "foreground": "#181926",
+      "label": "Characters",
+      "color_name": "Teal"
+    },
+    "digit": {
+      "rgb": "#eed49f",
+      "background": "#eed49f",
+      "foreground": "#181926",
+      "label": "Numbers",
+      "color_name": "Yellow"
+    },
+    "function": {
+      "rgb": "#f0c6c6",
+      "background": "#f0c6c6",
+      "foreground": "#181926",
+      "label": "Function keys",
+      "color_name": "Flamingo"
+    },
+    "edit": {
+      "rgb": "#ff7c4d",
+      "background": "#ffccbc",
+      "foreground": "#20232a"
+    },
+    "shift": {
+      "rgb": "#eed49f",
+      "background": "#eed49f",
+      "foreground": "#181926",
+      "label": "Shift",
+      "color_name": "Yellow"
+    },
+    "ctrl": {
+      "rgb": "#a6da95",
+      "background": "#a6da95",
+      "foreground": "#181926",
+      "label": "Control",
+      "color_name": "Green"
+    },
+    "alt": {
+      "rgb": "#91d7e3",
+      "background": "#91d7e3",
+      "foreground": "#181926",
+      "label": "Alt · Option",
+      "color_name": "Sky"
+    },
+    "cmd": {
+      "rgb": "#f5bde6",
+      "background": "#f5bde6",
+      "foreground": "#181926",
+      "label": "Command",
+      "color_name": "Pink"
+    },
+    "layer": {
+      "rgb": "#c6a0f6",
+      "background": "#c6a0f6",
+      "foreground": "#181926",
+      "label": "Layer keys",
+      "color_name": "Mauve"
+    },
+    "navigation": {
+      "rgb": "#91d7e3",
+      "background": "#91d7e3",
+      "foreground": "#181926",
+      "label": "Navigation",
+      "color_name": "Sky"
+    },
+    "media": {
+      "rgb": "#8bd5ca",
+      "background": "#8bd5ca",
+      "foreground": "#181926",
+      "label": "Media",
+      "color_name": "Teal"
+    },
+    "connection": {
+      "rgb": "#a6da95",
+      "background": "#a6da95",
+      "foreground": "#181926",
+      "label": "Connections",
+      "color_name": "Green"
+    },
+    "lighting": {
+      "rgb": "#eed49f",
+      "background": "#eed49f",
+      "foreground": "#181926",
+      "label": "Brightness",
+      "color_name": "Yellow"
+    },
+    "danger": {
+      "rgb": "#ed8796",
+      "background": "#ed8796",
+      "foreground": "#181926",
+      "label": "Reset · Boot",
+      "color_name": "Red"
+    },
+    "lock": {
+      "rgb": "#ffff00",
+      "background": "#fff59d",
+      "foreground": "#20232a"
+    },
+    "cursor.cor": {
+      "rgb": "#ff7c4d",
+      "background": "#ffccbc",
+      "foreground": "#20232a"
+    },
+    "cursor.azu": {
+      "rgb": "#99f5ff",
+      "background": "#e0f2f1",
+      "foreground": "#20232a"
+    },
+    "cursor.blu": {
+      "rgb": "#0000ff",
+      "background": "#e0f2f1",
+      "foreground": "#20232a"
+    },
+    "cursor.chu": {
+      "rgb": "#80ff00",
+      "background": "#e8f5e9",
+      "foreground": "#20232a"
+    },
+    "number.___": {
+      "rgb": "#000000",
+      "background": "#29333b",
+      "foreground": "#20232a"
+    },
+    "number.gdn": {
+      "rgb": "#eed49f",
+      "background": "#eed49f",
+      "foreground": "#181926",
+      "label": "Digits · Hex",
+      "color_name": "Yellow"
+    },
+    "number.cor": {
+      "rgb": "#ff7c4d",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "number.tea": {
+      "rgb": "#8bd5ca",
+      "background": "#8bd5ca",
+      "foreground": "#181926",
+      "label": "Vim navigation",
+      "color_name": "Teal"
+    },
+    "number.spg": {
+      "rgb": "#a6da95",
+      "background": "#a6da95",
+      "foreground": "#181926",
+      "label": "Operators · Symbols",
+      "color_name": "Green"
+    },
+    "number.gol": {
+      "rgb": "#eed49f",
+      "background": "#eed49f",
+      "foreground": "#181926",
+      "label": "Digits · Hex",
+      "color_name": "Yellow"
+    },
+    "number.ylw": {
+      "rgb": "#ffff00",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "number.maj": {
+      "rgb": "#ff00ff",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "number.cyn": {
+      "rgb": "#00ffff",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "number.grn": {
+      "rgb": "#00ff00",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "number.pur": {
+      "rgb": "#7a00ff",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "number.red": {
+      "rgb": "#ff0000",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "symbol.___": {
+      "rgb": "#000000",
+      "background": "#29333b",
+      "foreground": "#20232a"
+    },
+    "symbol.cor": {
+      "rgb": "#ff7c4d",
+      "background": "#c5cae9",
+      "foreground": "#20232a"
+    },
+    "symbol.pnk": {
+      "rgb": "#f5bde6",
+      "background": "#f5bde6",
+      "foreground": "#181926",
+      "label": "Quotes",
+      "color_name": "Pink"
+    },
+    "symbol.azu": {
+      "rgb": "#91d7e3",
+      "background": "#91d7e3",
+      "foreground": "#181926",
+      "label": "Brackets",
+      "color_name": "Sky"
+    },
+    "symbol.chu": {
+      "rgb": "#8bd5ca",
+      "background": "#8bd5ca",
+      "foreground": "#181926",
+      "label": "Punctuation",
+      "color_name": "Teal"
+    },
+    "symbol.pur": {
+      "rgb": "#c6a0f6",
+      "background": "#c6a0f6",
+      "foreground": "#181926",
+      "label": "Shell symbols",
+      "color_name": "Mauve"
+    },
+    "symbol.gdn": {
+      "rgb": "#eed49f",
+      "background": "#eed49f",
+      "foreground": "#181926",
+      "label": "Numeric symbols",
+      "color_name": "Yellow"
+    },
+    "symbol.spg": {
+      "rgb": "#a6da95",
+      "background": "#a6da95",
+      "foreground": "#181926",
+      "label": "Operators",
+      "color_name": "Green"
+    },
+    "symbol.blu": {
+      "rgb": "#8aadf4",
+      "background": "#8aadf4",
+      "foreground": "#181926",
+      "label": "Shell operators",
+      "color_name": "Blue"
+    },
+    "symbol.ylw": {
+      "rgb": "#ffff00",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "symbol.red": {
+      "rgb": "#ff0000",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "symbol.grn": {
+      "rgb": "#00ff00",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "symbol.cyn": {
+      "rgb": "#00ffff",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "symbol.maj": {
+      "rgb": "#ff00ff",
+      "background": "#d7ccc8",
+      "foreground": "#20232a"
+    },
+    "symbols": {
+      "rgb": "#a6da95",
+      "background": "#a6da95",
+      "foreground": "#181926",
+      "label": "Symbols",
+      "color_name": "Green"
+    },
+    "whitespace": {
+      "rgb": "#8aadf4",
+      "background": "#8aadf4",
+      "foreground": "#181926",
+      "label": "Space · Tab · Enter",
+      "color_name": "Blue"
+    },
+    "editing": {
+      "rgb": "#ed8796",
+      "background": "#ed8796",
+      "foreground": "#181926",
+      "label": "Editing · Escape",
+      "color_name": "Red"
+    },
+    "modifiers": {
+      "rgb": "#b7bdf8",
+      "background": "#b7bdf8",
+      "foreground": "#181926",
+      "label": "Modifiers",
+      "color_name": "Lavender"
+    },
+    "layer.active": {
+      "rgb": "#f5bde6",
+      "background": "#f5bde6",
+      "foreground": "#181926",
+      "label": "Active layer",
+      "color_name": "Pink"
+    },
+    "layer.locked": {
+      "rgb": "#ed8796",
+      "background": "#ed8796",
+      "foreground": "#181926",
+      "label": "Locked layer",
+      "color_name": "Red"
+    },
+    "system": {
+      "rgb": "#ee99a0",
+      "background": "#ee99a0",
+      "foreground": "#181926",
+      "label": "System keys",
+      "color_name": "Maroon"
+    }
+  },
+  "layers": [
+    [
+      "function",
+      "function",
+      "function",
+      "function",
+      "function",
+      "function",
+      "function",
+      "function",
+      "function",
+      "function",
+      "function",
+      "digit",
+      "digit",
+      "digit",
+      "digit",
+      "digit",
+      "digit",
+      "digit",
+      "digit",
+      "digit",
+      "digit",
+      "function",
+      "blank",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "symbols",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "blank",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "symbols",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "blank",
+      "symbols",
+      "symbols",
+      "symbols",
+      "symbols",
+      "layer",
+      "shift",
+      "cmd",
+      "ctrl",
+      "whitespace",
+      "cmd",
+      "shift",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "alpha",
+      "blank",
+      "layer",
+      "blank",
+      "symbols",
+      "symbols",
+      "layer",
+      "whitespace",
+      "editing",
+      "alt",
+      "whitespace",
+      "editing",
+      "alpha",
+      "layer",
+      "symbols",
+      "symbols",
+      "symbols",
+      "layer"
+    ],
+    [
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "media",
+      "media",
+      "media",
+      "lighting",
+      "lighting",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "editing",
+      "system",
+      "system",
+      "system",
+      "system",
+      "media",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "editing",
+      "navigation",
+      "navigation",
+      "navigation",
+      "navigation",
+      "media",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "layer.active",
+      "shift",
+      "cmd",
+      "ctrl",
+      "whitespace",
+      "cmd",
+      "shift",
+      "layer",
+      "navigation",
+      "navigation",
+      "navigation",
+      "navigation",
+      "media",
+      "layer",
+      "blank",
+      "blank",
+      "blank",
+      "layer",
+      "whitespace",
+      "editing",
+      "alt",
+      "whitespace",
+      "editing",
+      "alpha",
+      "layer",
+      "blank",
+      "blank",
+      "blank",
+      "layer"
+    ],
+    [
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "number.gdn",
+      "number.gdn",
+      "number.gdn",
+      "number.gdn",
+      "number.gdn",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "number.tea",
+      "number.spg",
+      "number.spg",
+      "number.spg",
+      "number.spg",
+      "number.spg",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "number.tea",
+      "number.gol",
+      "number.gol",
+      "number.gol",
+      "number.spg",
+      "number.spg",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "number.tea",
+      "number.gol",
+      "number.gol",
+      "number.gol",
+      "number.spg",
+      "number.spg",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "shift",
+      "cmd",
+      "ctrl",
+      "number.spg",
+      "number.spg",
+      "number.spg",
+      "number.tea",
+      "number.gol",
+      "number.gol",
+      "number.gol",
+      "number.spg",
+      "number.spg",
+      "layer",
+      "blank",
+      "blank",
+      "blank",
+      "layer.active",
+      "whitespace",
+      "editing",
+      "alt",
+      "number.spg",
+      "number.spg",
+      "number.gol",
+      "number.spg",
+      "number.spg",
+      "number.spg",
+      "number.spg",
+      "layer"
+    ],
+    [
+      "connection",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "connection",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "lighting",
+      "lighting",
+      "lighting",
+      "lighting",
+      "lighting",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "danger",
+      "lighting",
+      "lighting",
+      "lighting",
+      "lighting",
+      "lighting",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "danger",
+      "danger",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "layer",
+      "connection",
+      "connection",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "danger",
+      "layer.active",
+      "blank",
+      "blank",
+      "blank",
+      "layer",
+      "connection",
+      "connection",
+      "connection",
+      "blank",
+      "blank",
+      "blank",
+      "layer",
+      "blank",
+      "blank",
+      "blank",
+      "layer.active"
+    ],
+    [
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "symbol.pnk",
+      "symbol.azu",
+      "symbol.azu",
+      "symbol.chu",
+      "symbol.chu",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "symbol.pur",
+      "symbol.azu",
+      "symbol.azu",
+      "symbol.azu",
+      "symbol.azu",
+      "symbol.gdn",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "symbol.gdn",
+      "symbol.gdn",
+      "symbol.spg",
+      "symbol.blu",
+      "symbol.gdn",
+      "symbol.gdn",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "symbol.pur",
+      "symbol.spg",
+      "symbol.spg",
+      "symbol.spg",
+      "symbol.spg",
+      "symbol.gdn",
+      "symbol.pur",
+      "symbol.chu",
+      "symbol.gdn",
+      "whitespace",
+      "cmd",
+      "shift",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "blank",
+      "layer",
+      "symbol.blu",
+      "symbol.pnk",
+      "symbol.pnk",
+      "symbol.blu",
+      "symbol.gdn",
+      "symbol.gdn",
+      "symbol.gdn",
+      "whitespace",
+      "editing",
+      "alpha",
+      "layer.active",
+      "blank",
+      "blank",
+      "blank",
+      "layer"
+    ]
+  ],
+  "theme": {
+    "name": "Catppuccin Macchiato",
+    "source": "https://github.com/catppuccin/catppuccin#-palette",
+    "colors": {
+      "rosewater": "#f4dbd6",
+      "flamingo": "#f0c6c6",
+      "pink": "#f5bde6",
+      "mauve": "#c6a0f6",
+      "red": "#ed8796",
+      "maroon": "#ee99a0",
+      "peach": "#f5a97f",
+      "yellow": "#eed49f",
+      "green": "#a6da95",
+      "teal": "#8bd5ca",
+      "sky": "#91d7e3",
+      "sapphire": "#7dc4e4",
+      "blue": "#8aadf4",
+      "lavender": "#b7bdf8",
+      "text": "#cad3f5",
+      "subtext0": "#a5adcb",
+      "surface0": "#363a4f",
+      "surface1": "#494d64",
+      "surface2": "#5b6078",
+      "base": "#24273a",
+      "mantle": "#1e2030",
+      "crust": "#181926"
+    }
+  },
+  "default_theme": "macchiato",
+  "themes": {
+    "latte": {
+      "name": "Catppuccin Latte",
+      "roles": {
+        "blank": {
+          "rgb": "#000000",
+          "background": "#e6e9ef",
+          "foreground": "#181926",
+          "label": "Disabled",
+          "color_name": "Unlit"
+        },
+        "alpha": {
+          "rgb": "#179299",
+          "background": "#179299",
+          "foreground": "#181926",
+          "label": "Characters",
+          "color_name": "Teal"
+        },
+        "digit": {
+          "rgb": "#df8e1d",
+          "background": "#df8e1d",
+          "foreground": "#181926",
+          "label": "Numbers",
+          "color_name": "Yellow"
+        },
+        "function": {
+          "rgb": "#dd7878",
+          "background": "#dd7878",
+          "foreground": "#181926",
+          "label": "Function keys",
+          "color_name": "Flamingo"
+        },
+        "shift": {
+          "rgb": "#df8e1d",
+          "background": "#df8e1d",
+          "foreground": "#181926",
+          "label": "Shift",
+          "color_name": "Yellow"
+        },
+        "ctrl": {
+          "rgb": "#40a02b",
+          "background": "#40a02b",
+          "foreground": "#181926",
+          "label": "Control",
+          "color_name": "Green"
+        },
+        "alt": {
+          "rgb": "#04a5e5",
+          "background": "#04a5e5",
+          "foreground": "#181926",
+          "label": "Alt · Option",
+          "color_name": "Sky"
+        },
+        "cmd": {
+          "rgb": "#ea76cb",
+          "background": "#ea76cb",
+          "foreground": "#181926",
+          "label": "Command",
+          "color_name": "Pink"
+        },
+        "layer": {
+          "rgb": "#8839ef",
+          "background": "#8839ef",
+          "foreground": "#ffffff",
+          "label": "Layer keys",
+          "color_name": "Mauve"
+        },
+        "navigation": {
+          "rgb": "#04a5e5",
+          "background": "#04a5e5",
+          "foreground": "#181926",
+          "label": "Navigation",
+          "color_name": "Sky"
+        },
+        "media": {
+          "rgb": "#179299",
+          "background": "#179299",
+          "foreground": "#181926",
+          "label": "Media",
+          "color_name": "Teal"
+        },
+        "connection": {
+          "rgb": "#40a02b",
+          "background": "#40a02b",
+          "foreground": "#181926",
+          "label": "Connections",
+          "color_name": "Green"
+        },
+        "lighting": {
+          "rgb": "#df8e1d",
+          "background": "#df8e1d",
+          "foreground": "#181926",
+          "label": "Brightness",
+          "color_name": "Yellow"
+        },
+        "danger": {
+          "rgb": "#d20f39",
+          "background": "#d20f39",
+          "foreground": "#ffffff",
+          "label": "Reset · Boot",
+          "color_name": "Red"
+        },
+        "number.gdn": {
+          "rgb": "#df8e1d",
+          "background": "#df8e1d",
+          "foreground": "#181926",
+          "label": "Digits · Hex",
+          "color_name": "Yellow"
+        },
+        "number.tea": {
+          "rgb": "#179299",
+          "background": "#179299",
+          "foreground": "#181926",
+          "label": "Vim navigation",
+          "color_name": "Teal"
+        },
+        "number.spg": {
+          "rgb": "#40a02b",
+          "background": "#40a02b",
+          "foreground": "#181926",
+          "label": "Operators · Symbols",
+          "color_name": "Green"
+        },
+        "number.gol": {
+          "rgb": "#df8e1d",
+          "background": "#df8e1d",
+          "foreground": "#181926",
+          "label": "Digits · Hex",
+          "color_name": "Yellow"
+        },
+        "symbol.pnk": {
+          "rgb": "#ea76cb",
+          "background": "#ea76cb",
+          "foreground": "#181926",
+          "label": "Quotes",
+          "color_name": "Pink"
+        },
+        "symbol.azu": {
+          "rgb": "#04a5e5",
+          "background": "#04a5e5",
+          "foreground": "#181926",
+          "label": "Brackets",
+          "color_name": "Sky"
+        },
+        "symbol.chu": {
+          "rgb": "#179299",
+          "background": "#179299",
+          "foreground": "#181926",
+          "label": "Punctuation",
+          "color_name": "Teal"
+        },
+        "symbol.pur": {
+          "rgb": "#8839ef",
+          "background": "#8839ef",
+          "foreground": "#ffffff",
+          "label": "Shell symbols",
+          "color_name": "Mauve"
+        },
+        "symbol.gdn": {
+          "rgb": "#df8e1d",
+          "background": "#df8e1d",
+          "foreground": "#181926",
+          "label": "Numeric symbols",
+          "color_name": "Yellow"
+        },
+        "symbol.spg": {
+          "rgb": "#40a02b",
+          "background": "#40a02b",
+          "foreground": "#181926",
+          "label": "Operators",
+          "color_name": "Green"
+        },
+        "symbol.blu": {
+          "rgb": "#1e66f5",
+          "background": "#1e66f5",
+          "foreground": "#ffffff",
+          "label": "Shell operators",
+          "color_name": "Blue"
+        },
+        "symbols": {
+          "rgb": "#40a02b",
+          "background": "#40a02b",
+          "foreground": "#181926",
+          "label": "Symbols",
+          "color_name": "Green"
+        },
+        "whitespace": {
+          "rgb": "#1e66f5",
+          "background": "#1e66f5",
+          "foreground": "#ffffff",
+          "label": "Space · Tab · Enter",
+          "color_name": "Blue"
+        },
+        "editing": {
+          "rgb": "#d20f39",
+          "background": "#d20f39",
+          "foreground": "#ffffff",
+          "label": "Editing · Escape",
+          "color_name": "Red"
+        },
+        "modifiers": {
+          "rgb": "#7287fd",
+          "background": "#7287fd",
+          "foreground": "#181926",
+          "label": "Modifiers",
+          "color_name": "Lavender"
+        },
+        "layer.active": {
+          "rgb": "#ea76cb",
+          "background": "#ea76cb",
+          "foreground": "#181926",
+          "label": "Active layer",
+          "color_name": "Pink"
+        },
+        "layer.locked": {
+          "rgb": "#d20f39",
+          "background": "#d20f39",
+          "foreground": "#ffffff",
+          "label": "Locked layer",
+          "color_name": "Red"
+        },
+        "system": {
+          "rgb": "#e64553",
+          "background": "#e64553",
+          "foreground": "#000000",
+          "label": "System keys",
+          "color_name": "Maroon"
+        }
+      },
+      "source": "https://github.com/catppuccin/palette"
+    },
+    "frappe": {
+      "name": "Catppuccin Frappé",
+      "roles": {
+        "blank": {
+          "rgb": "#000000",
+          "background": "#292c3c",
+          "foreground": "#ffffff",
+          "label": "Disabled",
+          "color_name": "Unlit"
+        },
+        "alpha": {
+          "rgb": "#81c8be",
+          "background": "#81c8be",
+          "foreground": "#181926",
+          "label": "Characters",
+          "color_name": "Teal"
+        },
+        "digit": {
+          "rgb": "#e5c890",
+          "background": "#e5c890",
+          "foreground": "#181926",
+          "label": "Numbers",
+          "color_name": "Yellow"
+        },
+        "function": {
+          "rgb": "#eebebe",
+          "background": "#eebebe",
+          "foreground": "#181926",
+          "label": "Function keys",
+          "color_name": "Flamingo"
+        },
+        "shift": {
+          "rgb": "#e5c890",
+          "background": "#e5c890",
+          "foreground": "#181926",
+          "label": "Shift",
+          "color_name": "Yellow"
+        },
+        "ctrl": {
+          "rgb": "#a6d189",
+          "background": "#a6d189",
+          "foreground": "#181926",
+          "label": "Control",
+          "color_name": "Green"
+        },
+        "alt": {
+          "rgb": "#99d1db",
+          "background": "#99d1db",
+          "foreground": "#181926",
+          "label": "Alt · Option",
+          "color_name": "Sky"
+        },
+        "cmd": {
+          "rgb": "#f4b8e4",
+          "background": "#f4b8e4",
+          "foreground": "#181926",
+          "label": "Command",
+          "color_name": "Pink"
+        },
+        "layer": {
+          "rgb": "#ca9ee6",
+          "background": "#ca9ee6",
+          "foreground": "#181926",
+          "label": "Layer keys",
+          "color_name": "Mauve"
+        },
+        "navigation": {
+          "rgb": "#99d1db",
+          "background": "#99d1db",
+          "foreground": "#181926",
+          "label": "Navigation",
+          "color_name": "Sky"
+        },
+        "media": {
+          "rgb": "#81c8be",
+          "background": "#81c8be",
+          "foreground": "#181926",
+          "label": "Media",
+          "color_name": "Teal"
+        },
+        "connection": {
+          "rgb": "#a6d189",
+          "background": "#a6d189",
+          "foreground": "#181926",
+          "label": "Connections",
+          "color_name": "Green"
+        },
+        "lighting": {
+          "rgb": "#e5c890",
+          "background": "#e5c890",
+          "foreground": "#181926",
+          "label": "Brightness",
+          "color_name": "Yellow"
+        },
+        "danger": {
+          "rgb": "#e78284",
+          "background": "#e78284",
+          "foreground": "#181926",
+          "label": "Reset · Boot",
+          "color_name": "Red"
+        },
+        "number.gdn": {
+          "rgb": "#e5c890",
+          "background": "#e5c890",
+          "foreground": "#181926",
+          "label": "Digits · Hex",
+          "color_name": "Yellow"
+        },
+        "number.tea": {
+          "rgb": "#81c8be",
+          "background": "#81c8be",
+          "foreground": "#181926",
+          "label": "Vim navigation",
+          "color_name": "Teal"
+        },
+        "number.spg": {
+          "rgb": "#a6d189",
+          "background": "#a6d189",
+          "foreground": "#181926",
+          "label": "Operators · Symbols",
+          "color_name": "Green"
+        },
+        "number.gol": {
+          "rgb": "#e5c890",
+          "background": "#e5c890",
+          "foreground": "#181926",
+          "label": "Digits · Hex",
+          "color_name": "Yellow"
+        },
+        "symbol.pnk": {
+          "rgb": "#f4b8e4",
+          "background": "#f4b8e4",
+          "foreground": "#181926",
+          "label": "Quotes",
+          "color_name": "Pink"
+        },
+        "symbol.azu": {
+          "rgb": "#99d1db",
+          "background": "#99d1db",
+          "foreground": "#181926",
+          "label": "Brackets",
+          "color_name": "Sky"
+        },
+        "symbol.chu": {
+          "rgb": "#81c8be",
+          "background": "#81c8be",
+          "foreground": "#181926",
+          "label": "Punctuation",
+          "color_name": "Teal"
+        },
+        "symbol.pur": {
+          "rgb": "#ca9ee6",
+          "background": "#ca9ee6",
+          "foreground": "#181926",
+          "label": "Shell symbols",
+          "color_name": "Mauve"
+        },
+        "symbol.gdn": {
+          "rgb": "#e5c890",
+          "background": "#e5c890",
+          "foreground": "#181926",
+          "label": "Numeric symbols",
+          "color_name": "Yellow"
+        },
+        "symbol.spg": {
+          "rgb": "#a6d189",
+          "background": "#a6d189",
+          "foreground": "#181926",
+          "label": "Operators",
+          "color_name": "Green"
+        },
+        "symbol.blu": {
+          "rgb": "#8caaee",
+          "background": "#8caaee",
+          "foreground": "#181926",
+          "label": "Shell operators",
+          "color_name": "Blue"
+        },
+        "symbols": {
+          "rgb": "#a6d189",
+          "background": "#a6d189",
+          "foreground": "#181926",
+          "label": "Symbols",
+          "color_name": "Green"
+        },
+        "whitespace": {
+          "rgb": "#8caaee",
+          "background": "#8caaee",
+          "foreground": "#181926",
+          "label": "Space · Tab · Enter",
+          "color_name": "Blue"
+        },
+        "editing": {
+          "rgb": "#e78284",
+          "background": "#e78284",
+          "foreground": "#181926",
+          "label": "Editing · Escape",
+          "color_name": "Red"
+        },
+        "modifiers": {
+          "rgb": "#babbf1",
+          "background": "#babbf1",
+          "foreground": "#181926",
+          "label": "Modifiers",
+          "color_name": "Lavender"
+        },
+        "layer.active": {
+          "rgb": "#f4b8e4",
+          "background": "#f4b8e4",
+          "foreground": "#181926",
+          "label": "Active layer",
+          "color_name": "Pink"
+        },
+        "layer.locked": {
+          "rgb": "#e78284",
+          "background": "#e78284",
+          "foreground": "#181926",
+          "label": "Locked layer",
+          "color_name": "Red"
+        },
+        "system": {
+          "rgb": "#ea999c",
+          "background": "#ea999c",
+          "foreground": "#181926",
+          "label": "System keys",
+          "color_name": "Maroon"
+        }
+      },
+      "source": "https://github.com/catppuccin/palette"
+    },
+    "macchiato": {
+      "name": "Catppuccin Macchiato"
+    },
+    "mocha": {
+      "name": "Catppuccin Mocha",
+      "roles": {
+        "blank": {
+          "rgb": "#000000",
+          "background": "#181825",
+          "foreground": "#ffffff",
+          "label": "Disabled",
+          "color_name": "Unlit"
+        },
+        "alpha": {
+          "rgb": "#94e2d5",
+          "background": "#94e2d5",
+          "foreground": "#181926",
+          "label": "Characters",
+          "color_name": "Teal"
+        },
+        "digit": {
+          "rgb": "#f9e2af",
+          "background": "#f9e2af",
+          "foreground": "#181926",
+          "label": "Numbers",
+          "color_name": "Yellow"
+        },
+        "function": {
+          "rgb": "#f2cdcd",
+          "background": "#f2cdcd",
+          "foreground": "#181926",
+          "label": "Function keys",
+          "color_name": "Flamingo"
+        },
+        "shift": {
+          "rgb": "#f9e2af",
+          "background": "#f9e2af",
+          "foreground": "#181926",
+          "label": "Shift",
+          "color_name": "Yellow"
+        },
+        "ctrl": {
+          "rgb": "#a6e3a1",
+          "background": "#a6e3a1",
+          "foreground": "#181926",
+          "label": "Control",
+          "color_name": "Green"
+        },
+        "alt": {
+          "rgb": "#89dceb",
+          "background": "#89dceb",
+          "foreground": "#181926",
+          "label": "Alt · Option",
+          "color_name": "Sky"
+        },
+        "cmd": {
+          "rgb": "#f5c2e7",
+          "background": "#f5c2e7",
+          "foreground": "#181926",
+          "label": "Command",
+          "color_name": "Pink"
+        },
+        "layer": {
+          "rgb": "#cba6f7",
+          "background": "#cba6f7",
+          "foreground": "#181926",
+          "label": "Layer keys",
+          "color_name": "Mauve"
+        },
+        "navigation": {
+          "rgb": "#89dceb",
+          "background": "#89dceb",
+          "foreground": "#181926",
+          "label": "Navigation",
+          "color_name": "Sky"
+        },
+        "media": {
+          "rgb": "#94e2d5",
+          "background": "#94e2d5",
+          "foreground": "#181926",
+          "label": "Media",
+          "color_name": "Teal"
+        },
+        "connection": {
+          "rgb": "#a6e3a1",
+          "background": "#a6e3a1",
+          "foreground": "#181926",
+          "label": "Connections",
+          "color_name": "Green"
+        },
+        "lighting": {
+          "rgb": "#f9e2af",
+          "background": "#f9e2af",
+          "foreground": "#181926",
+          "label": "Brightness",
+          "color_name": "Yellow"
+        },
+        "danger": {
+          "rgb": "#f38ba8",
+          "background": "#f38ba8",
+          "foreground": "#181926",
+          "label": "Reset · Boot",
+          "color_name": "Red"
+        },
+        "number.gdn": {
+          "rgb": "#f9e2af",
+          "background": "#f9e2af",
+          "foreground": "#181926",
+          "label": "Digits · Hex",
+          "color_name": "Yellow"
+        },
+        "number.tea": {
+          "rgb": "#94e2d5",
+          "background": "#94e2d5",
+          "foreground": "#181926",
+          "label": "Vim navigation",
+          "color_name": "Teal"
+        },
+        "number.spg": {
+          "rgb": "#a6e3a1",
+          "background": "#a6e3a1",
+          "foreground": "#181926",
+          "label": "Operators · Symbols",
+          "color_name": "Green"
+        },
+        "number.gol": {
+          "rgb": "#f9e2af",
+          "background": "#f9e2af",
+          "foreground": "#181926",
+          "label": "Digits · Hex",
+          "color_name": "Yellow"
+        },
+        "symbol.pnk": {
+          "rgb": "#f5c2e7",
+          "background": "#f5c2e7",
+          "foreground": "#181926",
+          "label": "Quotes",
+          "color_name": "Pink"
+        },
+        "symbol.azu": {
+          "rgb": "#89dceb",
+          "background": "#89dceb",
+          "foreground": "#181926",
+          "label": "Brackets",
+          "color_name": "Sky"
+        },
+        "symbol.chu": {
+          "rgb": "#94e2d5",
+          "background": "#94e2d5",
+          "foreground": "#181926",
+          "label": "Punctuation",
+          "color_name": "Teal"
+        },
+        "symbol.pur": {
+          "rgb": "#cba6f7",
+          "background": "#cba6f7",
+          "foreground": "#181926",
+          "label": "Shell symbols",
+          "color_name": "Mauve"
+        },
+        "symbol.gdn": {
+          "rgb": "#f9e2af",
+          "background": "#f9e2af",
+          "foreground": "#181926",
+          "label": "Numeric symbols",
+          "color_name": "Yellow"
+        },
+        "symbol.spg": {
+          "rgb": "#a6e3a1",
+          "background": "#a6e3a1",
+          "foreground": "#181926",
+          "label": "Operators",
+          "color_name": "Green"
+        },
+        "symbol.blu": {
+          "rgb": "#89b4fa",
+          "background": "#89b4fa",
+          "foreground": "#181926",
+          "label": "Shell operators",
+          "color_name": "Blue"
+        },
+        "symbols": {
+          "rgb": "#a6e3a1",
+          "background": "#a6e3a1",
+          "foreground": "#181926",
+          "label": "Symbols",
+          "color_name": "Green"
+        },
+        "whitespace": {
+          "rgb": "#89b4fa",
+          "background": "#89b4fa",
+          "foreground": "#181926",
+          "label": "Space · Tab · Enter",
+          "color_name": "Blue"
+        },
+        "editing": {
+          "rgb": "#f38ba8",
+          "background": "#f38ba8",
+          "foreground": "#181926",
+          "label": "Editing · Escape",
+          "color_name": "Red"
+        },
+        "modifiers": {
+          "rgb": "#b4befe",
+          "background": "#b4befe",
+          "foreground": "#181926",
+          "label": "Modifiers",
+          "color_name": "Lavender"
+        },
+        "layer.active": {
+          "rgb": "#f5c2e7",
+          "background": "#f5c2e7",
+          "foreground": "#181926",
+          "label": "Active layer",
+          "color_name": "Pink"
+        },
+        "layer.locked": {
+          "rgb": "#f38ba8",
+          "background": "#f38ba8",
+          "foreground": "#181926",
+          "label": "Locked layer",
+          "color_name": "Red"
+        },
+        "system": {
+          "rgb": "#eba0ac",
+          "background": "#eba0ac",
+          "foreground": "#181926",
+          "label": "System keys",
+          "color_name": "Maroon"
+        }
+      },
+      "source": "https://github.com/catppuccin/palette"
+    },
+    "qmk": {
+      "name": "QMK (Sunaku)",
+      "roles": {
+        "blank": {
+          "rgb": "#000000",
+          "background": "#29333b",
+          "foreground": "#ced6dc",
+          "label": "Disabled",
+          "color_name": "Unlit",
+          "source_color": "BLK_RGB"
+        },
+        "alpha": {
+          "rgb": "#99f5ff",
+          "background": "#e0f2f1",
+          "foreground": "#20232a",
+          "label": "Characters",
+          "color_name": "Azure",
+          "source_color": "AZU_RGB"
+        },
+        "digit": {
+          "rgb": "#ffff00",
+          "background": "#fff59d",
+          "foreground": "#20232a",
+          "label": "Numbers",
+          "color_name": "Yellow",
+          "source_color": "YLW_RGB"
+        },
+        "function": {
+          "rgb": "#ff80bf",
+          "background": "#fce4ec",
+          "foreground": "#20232a",
+          "label": "Function keys",
+          "color_name": "Pink",
+          "source_color": "PNK_RGB"
+        },
+        "shift": {
+          "rgb": "#ffff00",
+          "background": "#fff59d",
+          "foreground": "#20232a",
+          "label": "Shift",
+          "color_name": "Yellow",
+          "source_color": "YLW_RGB"
+        },
+        "ctrl": {
+          "rgb": "#00ff00",
+          "background": "#c8e6c9",
+          "foreground": "#20232a",
+          "label": "Control",
+          "color_name": "Green",
+          "source_color": "GRN_RGB"
+        },
+        "alt": {
+          "rgb": "#00ffff",
+          "background": "#b2ebf2",
+          "foreground": "#20232a",
+          "label": "Alt · Option",
+          "color_name": "Cyan",
+          "source_color": "CYN_RGB"
+        },
+        "cmd": {
+          "rgb": "#ff00ff",
+          "background": "#f3c6f1",
+          "foreground": "#20232a",
+          "label": "Command",
+          "color_name": "Magenta",
+          "source_color": "MAJ_RGB"
+        },
+        "layer": {
+          "rgb": "#6b1fce",
+          "background": "#d1c4e9",
+          "foreground": "#20232a",
+          "label": "Layer keys",
+          "color_name": "Lilac",
+          "source_color": "LAC_RGB"
+        },
+        "navigation": {
+          "rgb": "#99f5ff",
+          "background": "#e0f2f1",
+          "foreground": "#20232a",
+          "label": "Navigation",
+          "color_name": "Azure",
+          "source_color": "AZU_RGB"
+        },
+        "media": {
+          "rgb": "#99f5ff",
+          "background": "#e0f2f1",
+          "foreground": "#20232a",
+          "label": "Media",
+          "color_name": "Azure",
+          "source_color": "AZU_RGB"
+        },
+        "connection": {
+          "rgb": "#00ff00",
+          "background": "#c8e6c9",
+          "foreground": "#20232a",
+          "label": "Connections",
+          "color_name": "Green",
+          "source_color": "GRN_RGB"
+        },
+        "lighting": {
+          "rgb": "#ffff00",
+          "background": "#fff59d",
+          "foreground": "#20232a",
+          "label": "Brightness",
+          "color_name": "Yellow",
+          "source_color": "YLW_RGB"
+        },
+        "danger": {
+          "rgb": "#ff0000",
+          "background": "#ffcdd2",
+          "foreground": "#20232a",
+          "label": "Reset · Boot",
+          "color_name": "Red",
+          "source_color": "RED_RGB"
+        },
+        "number.gdn": {
+          "rgb": "#ffff00",
+          "background": "#fff59d",
+          "foreground": "#20232a",
+          "label": "Digits · Hex",
+          "color_name": "Yellow",
+          "source_color": "YLW_RGB"
+        },
+        "number.tea": {
+          "rgb": "#99f5ff",
+          "background": "#e0f2f1",
+          "foreground": "#20232a",
+          "label": "Vim navigation",
+          "color_name": "Azure",
+          "source_color": "AZU_RGB"
+        },
+        "number.spg": {
+          "rgb": "#00ff00",
+          "background": "#c8e6c9",
+          "foreground": "#20232a",
+          "label": "Operators · Symbols",
+          "color_name": "Green",
+          "source_color": "GRN_RGB"
+        },
+        "number.gol": {
+          "rgb": "#ffff00",
+          "background": "#fff59d",
+          "foreground": "#20232a",
+          "label": "Digits · Hex",
+          "color_name": "Yellow",
+          "source_color": "YLW_RGB"
+        },
+        "symbol.pnk": {
+          "rgb": "#ff80bf",
+          "background": "#fce4ec",
+          "foreground": "#20232a",
+          "label": "Quotes",
+          "color_name": "Pink",
+          "source_color": "PNK_RGB"
+        },
+        "symbol.azu": {
+          "rgb": "#99f5ff",
+          "background": "#e0f2f1",
+          "foreground": "#20232a",
+          "label": "Brackets",
+          "color_name": "Azure",
+          "source_color": "AZU_RGB"
+        },
+        "symbol.chu": {
+          "rgb": "#99f5ff",
+          "background": "#e0f2f1",
+          "foreground": "#20232a",
+          "label": "Punctuation",
+          "color_name": "Azure",
+          "source_color": "AZU_RGB"
+        },
+        "symbol.pur": {
+          "rgb": "#6b1fce",
+          "background": "#d1c4e9",
+          "foreground": "#20232a",
+          "label": "Shell symbols",
+          "color_name": "Lilac",
+          "source_color": "LAC_RGB"
+        },
+        "symbol.gdn": {
+          "rgb": "#ffff00",
+          "background": "#fff59d",
+          "foreground": "#20232a",
+          "label": "Numeric symbols",
+          "color_name": "Yellow",
+          "source_color": "YLW_RGB"
+        },
+        "symbol.spg": {
+          "rgb": "#00ff00",
+          "background": "#c8e6c9",
+          "foreground": "#20232a",
+          "label": "Operators",
+          "color_name": "Green",
+          "source_color": "GRN_RGB"
+        },
+        "symbol.blu": {
+          "rgb": "#0000ff",
+          "background": "#c5cae9",
+          "foreground": "#20232a",
+          "label": "Shell operators",
+          "color_name": "Blue",
+          "source_color": "BLU_RGB"
+        },
+        "symbols": {
+          "rgb": "#00ff00",
+          "background": "#c8e6c9",
+          "foreground": "#20232a",
+          "label": "Symbols",
+          "color_name": "Green",
+          "source_color": "GRN_RGB"
+        },
+        "whitespace": {
+          "rgb": "#0000ff",
+          "background": "#c5cae9",
+          "foreground": "#20232a",
+          "label": "Space · Tab · Enter",
+          "color_name": "Blue",
+          "source_color": "BLU_RGB"
+        },
+        "editing": {
+          "rgb": "#ff0000",
+          "background": "#ffcdd2",
+          "foreground": "#20232a",
+          "label": "Editing · Escape",
+          "color_name": "Red",
+          "source_color": "RED_RGB"
+        },
+        "modifiers": {
+          "rgb": "#6b1fce",
+          "background": "#d1c4e9",
+          "foreground": "#20232a",
+          "label": "Modifiers",
+          "color_name": "Lilac",
+          "source_color": "LAC_RGB"
+        },
+        "layer.active": {
+          "rgb": "#ff80bf",
+          "background": "#fce4ec",
+          "foreground": "#20232a",
+          "label": "Active layer",
+          "color_name": "Pink",
+          "source_color": "PNK_RGB"
+        },
+        "layer.locked": {
+          "rgb": "#ff0000",
+          "background": "#ffcdd2",
+          "foreground": "#20232a",
+          "label": "Locked layer",
+          "color_name": "Red",
+          "source_color": "RED_RGB"
+        },
+        "system": {
+          "rgb": "#ff80bf",
+          "background": "#fce4ec",
+          "foreground": "#20232a",
+          "label": "System keys",
+          "color_name": "Pink",
+          "source_color": "PNK_RGB"
+        }
+      },
+      "source": "https://github.com/sunaku/glove80-keymaps/blob/7d8c0076308c5649614317fd8c6b53b800c46719/device.dtsi"
+    }
+  }
+}

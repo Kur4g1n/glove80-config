@@ -1,37 +1,78 @@
-# MoErgo Glove80 Custom Configuration for ZMK
+# Glove80 installation
 
-![MoErgo Logo](moergo_logo.png)
+## Install
 
-This repo is the official ZMK configuration of the MoErgo Glove80 wireless split contoured keyboard. Use it to develop your own keymap and easily build your own ZMK firmware to run on your Glove80.
+On macOS, install [Homebrew](https://brew.sh), then run from this repository:
 
-**NOTE: You can also customize the layout of your Glove80 keyboard with the Glove80 Layout Editor webapp. For most users Glove80 Layout Editor is the recommended and simpler option. More information is available at the official MoErgo Glove80 Support site (see resources below).**
+```sh
+brew install just
+just setup
+just doctor
+```
 
-These steps will get you using your keymap on your keyboard in the fastest time possible. It uses the GitHub Actions feature to build your firmware online.
+Setup installs missing tools and prepares Docker with Colima. Nix runs inside the container. If a C compiler is missing, run `xcode-select --install`. On Linux/WSL, install `just`, Docker, Python 3, Node.js, and a C compiler first.
 
-If you are looking to dig deeper into ZMK and develop new functionality, it is recommended to follow the steps of installing ZMK as found on the official ZMK documentation site (linked below).
+## Build
 
-## Resources
-- The [official MoErgo Glove80 Support](https://moergo.com/glove80-support) web site. Glove80 documentation and other technical resources.
-- The [official MoErgo Discord Server](https://moergo.com/discord). Instant conversations with other Glove80 users.
+```sh
+just check
+just build                 # Macchiato
+# just build macchiato,mocha # Choose palettes in cycle order
+just build-bilingual       # English + Statica; requires the host setup below
+just docs
+```
 
-- The [official ZMK Documentation](https://zmk.dev/docs) web site. Find the answers to many of your questions about ZMK Firmware.
-- The [official ZMK Discord Server](https://discord.gg/8cfMkQksSB). Instant conversations with other ZMK developers and users. Great technical resource!
+View the Macchiato map at [localhost:8000](http://127.0.0.1:8000). Choose firmware palettes from `qmk`, `latte`, `frappe`, `macchiato`, and `mocha`, separated by commas. The first is the default. **Magic → Effect** cycles through the chosen palettes, solid, breathing, spectrum, and swirl, then returns to the first palette. Saved effect preferences survive restarts. `qmk` uses Sunaku’s RGB colors with light Azure (`#99F5FF`) replacing dark teal; use `just build qmk` or mix it with other palettes.
 
-- The [official Glove80 ZMK Distribution](https://github.com/moergo-sc/zmk). Repositiory for ZMK firmware customized for Glove80. 
- 
-## Instructions
-1. Log into, or sign up for, your personal GitHub account.
-2. Create your own repository using this repository as a template ([instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)) and check it out on your local computer.
-3. Edit the keymap file(s) to suit your needs
-4. Commit and push your changes to your personal repo. Upon pushing it, GitHub Actions will start building a new version of your firmware with the updated keymap.
+Both halves and the combined `build/glove80.uf2` are generated. `build/key-theme.txt` records the chosen palettes; `build/keymap.json` shows the first palette in MoErgo. Build locally: MoErgo's online builder cannot include the custom module.
 
-## Firmware Files
-To locate your firmware files and reflash your Glove80...
-1. log into GitHub and navigate to your personal config repository you just uploaded your keymap changes to.
-2. Click "Actions" in the main navigation, and in the left navigation click the "Build" link.
-3. Select the desired workflow run in the centre area of the page (based on date and time of the build you wish to use). You can also start a new build from this page by clicking the "Run workflow" button.
-4. After clicking the desired workflow run, you should be presented with a section at the bottom of the page called "Artifacts". This section contains the results of your build, in a file called "glove80.uf2"
-5. Download the glove80.uf2
-6. Flash the firmware to Glove80 according to the user documentation on the official Glove80 Glove80 Support website (linked above)
+Each build also saves a copy in `build/standard/` or `build/bilingual/`. The top-level UF2 is always the **last build**; check `build/profile.txt` before flashing. Both commands accept the same palette choices.
 
-Your keyboard is now ready to use.
+## English and Russian
+
+The standard build works with a US English input layout. The bilingual build adds an adapted [Statica thumb layout](https://github.com/mohoaz1348-rgb/statica/tree/6a3e1a50fddfda463757d758e1c2437296224ef4), with **в** on the right thumb, all 33 Russian letters, and shared Number/Symbol output. The map's **EN/RU** button previews both languages, including Shift and PDF export; it does not switch the computer's language.
+
+Install the host setup **before flashing the bilingual build**:
+
+| System | Setup | Laptop keyboard |
+| --- | --- | --- |
+| macOS | [Karabiner + supplied input layouts](host/README.md#macos) | QWERTY / Russian PC (ЙЦУКЕН); Glove80-only rules activate with Russian |
+| Windows | [AutoHotkey + AutoHotInterception](host/README.md#windows) | Standard English / Russian; automatic Glove80 mapping and Ctrl/Win thumb swap |
+| Linux | [Device-specific XKB layouts](host/README.md#linux) | Existing layout stays assigned to the laptop |
+
+`just install` detects the host OS and installs its bilingual support files; Windows requires the prepared AutoHotInterception directory as an argument. The guides cover permissions, language switching, flag icons, reconnects, startup, and removal. No host software is installed by `just setup`. The Russian positions live in `config/russian.json`; `just generate` also regenerates host maps.
+
+Finish building **before entering boot mode**. To prepare for flashing with only a mouse on macOS:
+
+```sh
+just flash-ready
+```
+
+This opens Finder at the firmware file and mounted volumes. On other systems, open those locations in the file manager.
+
+## Flash both halves
+
+Connect a USB **data** cable directly to the half being flashed. Start with the **right half**, then repeat for the **left**, using the same combined UF2.
+
+1. Switch the half off. Hold its two boot keys below while switching it on.
+2. Release the keys when its boot volume appears.
+3. Using the mouse, copy `build/glove80.uf2` onto that volume. Wait for copying to finish and the volume to disappear.
+
+| Half | Hold at power-on | Boot volume |
+| --- | --- | --- |
+| Left | `L_C6R6` + `L_C3R3` (Magic + O in this layout) | `GLV80LHBOOT` |
+| Right | `R_C6R6` + `R_C3R3` (Magic + D in this layout) | `GLV80RHBOOT` |
+
+`C6` is the outermost column; rows count from the top. These physical boot keys work regardless of the installed layout. Once installed, **Magic + C6R4** also enters boot mode on that half.
+
+A half in boot mode cannot type. If already there, use the prepared Finder windows to copy firmware with the mouse. To exit without flashing, switch it off and on without holding keys. After flashing, turn both halves on and connect USB to the **left** half for typing. [MoErgo's flashing guide](https://docs.moergo.com/glove80-user-guide/customizing-key-layout/#loading-new-zmk-firmware-onto-your-glove80).
+
+With another keyboard available, `just flash /Volumes/GLV80RHBOOT` copies to an explicitly selected boot volume; repeat with `/Volumes/GLV80LHBOOT` for the left half.
+
+## Restart and reset
+
+**Restart:** switch the half off and on, or press **Magic + C6R5**. Saved settings remain intact.
+
+**Reset settings and pair the halves:** switch both off. Hold `L_C6R6` + `L_C3R2` (Magic + 3), switch the left half on, hold for **5 seconds**, then switch it off. Repeat on the right with `R_C6R6` + `R_C3R2` (Magic + 8). Turn both on together, check both respond, and leave them on for **at least one minute**. This clears saved preferences and Bluetooth pairings, retaining the firmware. [MoErgo's reset guide](https://docs.moergo.com/glove80-user-guide/troubleshooting/#configuration-factory-reset-and-re-pairing-left-and-right-halves).
+
+For Bluetooth, select a green **BT 0–BT 3** key on Magic and pair “Glove80” in the computer's Bluetooth settings. Forget any old pairing after a reset. For USB, connect the left half and select **USB** on Magic.

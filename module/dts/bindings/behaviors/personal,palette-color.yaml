@@ -1,0 +1,12 @@
+description: Selected firmware palette color, including the locked layer indicator
+compatible: "personal,palette-color"
+include: two_param.yaml
+properties:
+  theme-count:
+    type: int
+    required: true
+    description: Number of selected palettes in effect-cycle order
+  colors:
+    type: array
+    required: true
+    description: Each palette contains five maps of 80 RGB colors followed by its lock color

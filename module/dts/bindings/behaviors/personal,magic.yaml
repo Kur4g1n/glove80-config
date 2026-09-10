@@ -1,0 +1,3 @@
+description: Immediate Magic layer and status on unused tap
+compatible: "personal,magic"
+include: zero_param.yaml

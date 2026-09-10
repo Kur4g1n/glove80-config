@@ -1,0 +1,39 @@
+--- a/src/rgb_underglow.c
++++ b/src/rgb_underglow.c
+@@ -562,7 +562,9 @@
+         current_effect : CONFIG_ZMK_RGB_UNDERGLOW_EFF_START,
+         animation_step : 0,
+         on : IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW_ON_START),
+-        layer_enabled : false
++        layer_enabled : IS_ENABLED(CONFIG_EXPERIMENTAL_RGB_LAYER) &&
++                        IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW_ON_START) &&
++                        CONFIG_ZMK_RGB_UNDERGLOW_EFF_START == 4
+     };
+ 
+ #if IS_ENABLED(CONFIG_SETTINGS)
+--- a/src/split/bluetooth/central.c
++++ b/src/split/bluetooth/central.c
+@@ -717,6 +717,13 @@
+ 
+     subscribed = subscribed && slot->update_layers_handle;
+ 
++#if IS_ENABLED(CONFIG_PERSONAL_GLOVE80)
++    if (subscribed) {
++        /* Resend RGB layer/lock state after service discovery, including reconnects. */
++        extern void personal_rgb_connected(void);
++        personal_rgb_connected();
++    }
++#endif
+     return subscribed ? BT_GATT_ITER_STOP : BT_GATT_ITER_CONTINUE;
+ }
+ 
+--- a/Kconfig
++++ b/Kconfig
+@@ -333,6 +333,7 @@
+ 
+ config ZMK_RGB_UNDERGLOW_EFF_START
+     int "RGB underglow start effect int value related to the effect enum list"
++    range 0 4 if EXPERIMENTAL_RGB_LAYER
+     range 0 3
+ 
+ config ZMK_RGB_UNDERGLOW_ON_START

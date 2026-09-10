@@ -1,0 +1,3 @@
+description: Immediate Shift with unbuffered dual-Shift Caps Lock
+compatible: "personal,shift"
+include: one_param.yaml

@@ -1,2 +1,10 @@
 *~
 *.uf2
+.cache/
+build/
+__pycache__/
+*.pyc
+.DS_Store
+tmp/
+host/macos/glove80.json
+host/windows/settings.ini

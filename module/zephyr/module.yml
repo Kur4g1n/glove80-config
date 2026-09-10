@@ -1,0 +1,6 @@
+name: personal_glove80
+build:
+  cmake: .
+  kconfig: Kconfig
+  settings:
+    dts_root: .

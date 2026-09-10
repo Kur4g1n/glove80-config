@@ -1,0 +1,4 @@
+config PERSONAL_GLOVE80
+    bool "Immediate Glove80 layers and dual Shift"
+    default y
+    depends on ZMK_RGB_UNDERGLOW && EXPERIMENTAL_RGB_LAYER

@@ -1,0 +1,105 @@
+--- a/src/rgb_underglow.c
++++ b/src/rgb_underglow.c
+@@ -79,7 +79,12 @@
+ #if IS_ENABLED(UNDERGLOW_LAYER_ENABLED)
+     UNDERGLOW_EFFECT_LAYER_INDICATORS,
+ #endif
+-    UNDERGLOW_EFFECT_NUMBER // Used to track number of underglow effects
++#if IS_ENABLED(UNDERGLOW_LAYER_ENABLED)
++    UNDERGLOW_EFFECT_NUMBER = UNDERGLOW_EFFECT_LAYER_INDICATORS +
++        DT_PROP_OR(DT_NODELABEL(palette_rgb), theme_count, 1)
++#else
++    UNDERGLOW_EFFECT_NUMBER
++#endif
+ };
+ 
+ struct rgb_underglow_state {
+@@ -99,6 +104,14 @@
+ static struct led_rgb status_pixels[STRIP_NUM_PIXELS];
+ 
+ static struct rgb_underglow_state state;
++
++#if IS_ENABLED(UNDERGLOW_LAYER_ENABLED)
++uint8_t zmk_rgb_underglow_palette_index(void) {
++    return state.current_effect >= UNDERGLOW_EFFECT_LAYER_INDICATORS &&
++           state.current_effect < UNDERGLOW_EFFECT_NUMBER
++               ? state.current_effect - UNDERGLOW_EFFECT_LAYER_INDICATORS : 0;
++}
++#endif
+ 
+ #if IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW_EXT_POWER)
+ static const struct device *const ext_power = DEVICE_DT_GET(DT_INST(0, zmk_ext_power_generic));
+@@ -481,7 +494,7 @@
+         zmk_rgb_underglow_effect_swirl();
+         break;
+ #if IS_ENABLED(UNDERGLOW_LAYER_ENABLED)
+-    case UNDERGLOW_EFFECT_LAYER_INDICATORS:
++    default:
+         zmk_rgb_underglow_effect_layer();
+         break;
+ #endif
+@@ -515,13 +528,19 @@
+         rc = read_cb(cb_arg, &state, sizeof(state));
+         if (rc >= 0) {
+             if (state.on) {
++                /* Restore both animated and per-layer effects after settings load. */
++                if (state.current_effect >= UNDERGLOW_EFFECT_NUMBER) {
++                    state.current_effect = CONFIG_ZMK_RGB_UNDERGLOW_EFF_START;
++                }
++#if IS_ENABLED(UNDERGLOW_LAYER_ENABLED)
++                state.layer_enabled =
++                    state.current_effect >= UNDERGLOW_EFFECT_LAYER_INDICATORS;
++#endif
++                zmk_rgb_underglow_transient_on();
+ #if IS_ENABLED(UNDERGLOW_LAYER_ENABLED)
+                 if (state.layer_enabled) {
+-                    zmk_rgb_underglow_transient_on();
+                     zmk_rgb_underglow_set_layer(rgb_underglow_top_layer(), true);
+                 }
+-#else
+-                k_timer_start(&underglow_tick, K_NO_WAIT, K_MSEC(50));
+ #endif
+             }
+             return 0;
+@@ -638,11 +657,16 @@
+ 
+ int zmk_rgb_underglow_on(void) {
+ #if IS_ENABLED(UNDERGLOW_LAYER_ENABLED)
+-    if (state.current_effect == UNDERGLOW_EFFECT_LAYER_INDICATORS) {
++    if (state.current_effect >= UNDERGLOW_EFFECT_LAYER_INDICATORS) {
+         state.layer_enabled = true;
+     }
+ #endif
+     zmk_rgb_underglow_transient_on();
++#if IS_ENABLED(UNDERGLOW_LAYER_ENABLED)
++    if (state.layer_enabled) {
++        zmk_rgb_underglow_set_layer(rgb_underglow_top_layer(), true);
++    }
++#endif
+     return zmk_rgb_underglow_save_state();
+ }
+ 
+@@ -704,8 +728,21 @@
+     state.current_effect = effect;
+     state.animation_step = 0;
+ #if IS_ENABLED(UNDERGLOW_LAYER_ENABLED)
+-    state.layer_enabled = (effect == UNDERGLOW_EFFECT_LAYER_INDICATORS);
+-#endif
++    state.layer_enabled = state.on && (effect >= UNDERGLOW_EFFECT_LAYER_INDICATORS);
++#endif
++    /* Layer maps stop the animation timer. Each selection must hand the display
++     * back to the new effect; selecting an effect while off must stay off. */
++    k_timer_stop(&underglow_tick);
++    if (state.on) {
++#if IS_ENABLED(UNDERGLOW_LAYER_ENABLED)
++        if (state.layer_enabled) {
++            zmk_rgb_underglow_set_layer(rgb_underglow_top_layer(), true);
++        } else
++#endif
++        {
++            zmk_rgb_underglow_transient_on();
++        }
++    }
+     return zmk_rgb_underglow_save_state();
+ }
+ 
