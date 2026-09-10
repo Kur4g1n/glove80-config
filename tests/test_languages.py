@@ -104,6 +104,26 @@ class LanguageTests(unittest.TestCase):
         for bad in ([],[{}],[{'vendor_id':-1,'product_id':1}]):
             with self.assertRaises(ValueError):lang.karabiner(self.source,bad)
 
+    def test_english_game_keys_keep_native_identities_across_hosts(self):
+        # English passthrough on Windows and native layouts on macOS/Linux
+        # require the firmware's ordinary scans to retain their US meanings.
+        english=lang.base_pairs(self.source,'en')
+        for code,pair in english.items():
+            if pair!=('',''):
+                self.assertEqual(pair,lang.us_pairs()[code])
+        rules=lang.karabiner(self.source,[{'vendor_id':1,'product_id':2}])['rules'][0]['manipulators']
+        for rule in rules:
+            if 'select_input_source' in rule['to'][0]:continue
+            if rule['from']['key_code'] in ('f13','f14','f15'):continue
+            self.assertIn({'type':'input_source_if','input_sources':[{'input_source_id':r'^org\.glove80\.inputmethod\.RussianPC$'}]},rule['conditions'])
+            self.assertIn('key_code',rule['to'][0])
+        linux_en=lang.xkb_symbols(self.source).split('xkb_symbols "ru"')[0]
+        for code,pair in english.items():
+            if not pair[0]:continue
+            line=next(line for line in linux_en.splitlines() if f'key <{lang.KEYS[code][3]}>' in line)
+            symbols=re.search(r'\[ (U[0-9A-F]+(?:, U[0-9A-F]+)*) \]',line).group(1).split(', ')
+            self.assertEqual(symbols,[f'U{ord(c):04X}' for c in (*pair,*lang.us_pairs()[code])])
+
     def test_cursor_switch_selects_exact_language_pair(self):
         key=self.source['layers'][1][lang.positions().index('R_C1R5')]
         self.assertEqual(layout.expr(key),'&kp LC(SPACE)')

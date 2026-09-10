@@ -130,8 +130,17 @@ KeyEvent(scan, state) {
     }
     shortcut := Held(0x1D) || Held(0x11D) || Held(0x15B) || Held(0x15C) || Held(0x38)
     if Layout.Has(scan) && !shortcut {
-        pair := Held(0x138) ? 5 : Russian() ? 3 : 1
+        isRussian := Russian()
         values := Layout[scan]
+        ; Firmware already emits US scan codes. Keep real down/up events in
+        ; English so games can read held keys; the right-Alt bank marker is
+        ; still consumed above. Russian mapping continues to use Unicode.
+        if !isRussian && values[1] {
+            Pressed[scan] := output
+            AHI.SendKeyEvent(Device, output, 1)
+            return
+        }
+        pair := Held(0x138) ? 5 : isRussian ? 3 : 1
         lower := values[pair]
         shifted := Held(0x2A) || Held(0x36)
         if lower && RegExMatch(Chr(lower), "^[A-Za-zА-Яа-яЁё]$") && GetKeyState("CapsLock", "T")

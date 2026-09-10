@@ -94,7 +94,7 @@ With `SwapThumbs=1`, **Cursor → EN / RU** becomes Win-Space and cycles Windows
 
 If the Windows language indicator changes but Notepad keeps typing in the old language, update the installed `Glove80.ahk` and restart the helper. Modern Notepad can host its editor on a different thread from its main window. The helper uses [GetGUIThreadInfo](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getguithreadinfo) to find the focused editor before querying its keyboard layout; older copies queried only the main window. The Windows indicator changing alone does not verify the helper's language detection.
 
-AHI must detect physical events from the selected connection in Monitor; Bluetooth support is device/driver-dependent. Bluetooth input and English/Russian switching, including the Notepad fix, were verified on one Windows PC with AutoHotkey 2.0.27, AutoHotInterception 0.9.2, and Interception 1.0.1. This does not establish compatibility with every Bluetooth driver. Interception has a [known reconnect/hibernate limitation](https://github.com/evilC/AutoHotInterception#known-issues): repeated reconnects can exhaust keyboard IDs and require a reboot. Ordinary text uses Windows Unicode input; applications that require raw keyboard events may need the standard build. For elevated applications, run the helper at the same elevation.
+AHI must detect physical events from the selected connection in Monitor; Bluetooth support is device/driver-dependent. Bluetooth input and English/Russian switching, including the Notepad fix, were verified on one Windows PC with AutoHotkey 2.0.27, AutoHotInterception 0.9.2, and Interception 1.0.1. This does not establish compatibility with every Bluetooth driver. Interception has a [known reconnect/hibernate limitation](https://github.com/evilC/AutoHotInterception#known-issues): repeated reconnects can exhaust keyboard IDs and require a reboot. English keys use normal scan-code down/up events, including held keys and the Number/Symbol output bank; Russian text still uses Windows Unicode input. Select English for gameplay. Earlier helper versions injected English as Unicode too, which caused Genshin Impact to ignore letters while recognizing thumb keys. Updating and restarting the helper resolved that issue on the tested PC. For elevated applications, run the helper at the same elevation.
 
 To remove the setup, exit the helper and remove its startup shortcut. Run `./install-interception.exe /uninstall` from the driver's installer folder in an administrator PowerShell, then restart. AutoHotkey can be removed through Windows Installed apps if nothing else uses it. Use the standard firmware when continuing without the bilingual helper.
 
@@ -119,6 +119,16 @@ input "VENDOR:PRODUCT:Glove80" {
 Reload Sway. Control-Space or **Cursor → EN / RU** switches Glove80's English/Russian groups. Add another exact device block if Bluetooth uses a different identifier. Leave the laptop's input block unchanged. See [Sway's input configuration](https://man.archlinux.org/man/sway-input.5.en).
 
 GNOME, KDE, and X11 have different device-layout configuration paths; the Sway block is not portable to them. Do not apply this layout globally if the laptop must retain its existing layout. Remove the device block to undo the setup. Linux modifier placement remains the firmware's arrangement.
+
+## Games
+
+Select English before gameplay and test movement while holding and releasing keys, combinations with Shift/Ctrl, and in-game text chat separately. Games can bind physical key positions instead of displayed letters, so an Enthium layout may require rebinding controls.
+
+- **Windows:** use the current helper. English preserves normal scan-code events and the thumb swap; the former Unicode-only English output was incompatible with Genshin Impact on the tested PC. Russian text remains Unicode-based and is not intended for gameplay controls.
+- **macOS:** choose **Glove80 English**. Ordinary English letters retain the firmware's native key identities; the generated Karabiner Statica letter rules are restricted to **Glove80 RussianPC**. English uses a native keyboard layout, not text injection. The dedicated language-switch chord and reserved F13–F15 signals are still handled by Karabiner. The Number/Symbol bank uses Option, which a game may also treat as a modifier.
+- **Linux:** choose the English group of the device-specific XKB layout. It maps native key events to US symbols rather than injecting text. The Number/Symbol bank uses the right-Alt level selector; handling of that modifier and device-specific configuration depends on the compositor and game.
+
+Automated checks cover English mapping identities, macOS Russian-only letter rules, and Linux English symbols. These checks are not macOS/Linux gameplay tests or a guarantee for every game. If a game rejects a remapped/virtual keyboard, use the standard firmware with a stock US input layout and disable the helper for that device through its normal settings.
 
 ## Layout source
 
