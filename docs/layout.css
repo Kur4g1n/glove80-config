@@ -24,7 +24,9 @@ button { font:inherit; cursor:pointer; border:0; color:var(--subtext0); backgrou
 button:hover:not(:disabled) { color:var(--text); background:var(--surface0); }
 button:focus-visible { outline:2px solid var(--pink); outline-offset:3px; }
 .tool { width:44px; display:grid; place-items:center; font-size:23px; }
-.tool svg { width:18px; height:18px; stroke:currentColor; stroke-width:1.7; fill:none; }
+.tool svg { width:20px; height:20px; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; fill:none; }
+.theme-toggle .icon-moon, :root[data-theme="light"] .theme-toggle .icon-sun { display:none; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display:block; }
 .tool[aria-pressed="true"] { color:#181926; background:#f5bde6; }
 .tool:disabled { opacity:.5; cursor:default; }
 .keyboard-viewport { width:100%; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; padding:8px 0 20px; }

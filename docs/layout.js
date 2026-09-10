@@ -192,7 +192,6 @@
   window.addEventListener('blur',()=>{shiftHeld=false;preview=null;render();});
   function setTheme(theme){
     document.documentElement.dataset.theme=theme;
-    themeButton.textContent=theme==='dark'?'☼':'☾';
     themeButton.setAttribute('aria-label',`Switch to ${theme==='dark'?'light':'dark'} theme`);
     document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#24273a':'#eff1f5';
   }
