@@ -1,5 +1,7 @@
 # Glove80 installation
 
+[Open the interactive keyboard map](https://kur4g1n.github.io/glove80-config/) — explore all five layers, preview English/Russian and Shift legends, and export a PDF.
+
 ## Install
 
 On macOS, install [Homebrew](https://brew.sh), then run from this repository:
@@ -22,7 +24,7 @@ just build-bilingual       # English + Statica; requires the host setup below
 just docs
 ```
 
-View the Macchiato map at [localhost:8000](http://127.0.0.1:8000). Choose firmware palettes from `qmk`, `latte`, `frappe`, `macchiato`, and `mocha`, separated by commas. The first is the default. **Magic → Effect** cycles through the chosen palettes, solid, breathing, spectrum, and swirl, then returns to the first palette. Saved effect preferences survive restarts. `qmk` uses Sunaku’s RGB colors with light Azure (`#99F5FF`) replacing dark teal; use `just build qmk` or mix it with other palettes.
+View the Macchiato map [online](https://kur4g1n.github.io/glove80-config/), or run `just docs` and open [localhost:8000](http://127.0.0.1:8000) for a local preview. GitHub Pages publishes `docs/` from `main`; commit regenerated documentation after `just generate` to update the online map. Choose firmware palettes from `qmk`, `latte`, `frappe`, `macchiato`, and `mocha`, separated by commas. The first is the default. **Magic → Effect** cycles through the chosen palettes, solid, breathing, spectrum, and swirl, then returns to the first palette. Saved effect preferences survive restarts. `qmk` uses Sunaku’s RGB colors with light Azure (`#99F5FF`) replacing dark teal; use `just build qmk` or mix it with other palettes.
 
 Both halves and the combined `build/glove80.uf2` are generated. `build/key-theme.txt` records the chosen palettes; `build/keymap.json` shows the first palette in MoErgo. Build locally: MoErgo's online builder cannot include the custom module.
 
