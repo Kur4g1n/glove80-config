@@ -173,7 +173,7 @@ def install(directory=''):
     if system=='Windows':
         settings=destinations[0].parent/'settings.ini'
         if not settings.exists(): shutil.copyfile(destinations[-1],settings)
-        print('Set Glove80 VID/PID in settings.ini, then run Glove80.ahk. Existing settings are preserved.')
+        print('Set Glove80 nonzero VID/PID or exact Handle from Monitor in settings.ini, then run Glove80.ahk. Existing settings are preserved; see host/README.md for Bluetooth and startup.')
     else: print('Assign the XKB layout to Glove80 in the compositor configuration; see host/README.md. No global layout was changed.')
 
 def main():

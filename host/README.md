@@ -41,16 +41,62 @@ To remove: disable the Glove80 rule, select the original input sources, remove t
 ## Windows
 
 1. Keep Windows' standard **English (United States)** and **Russian** keyboard layouts. Switch using Win-Space. No custom keyboard-layout DLL is required.
-2. Install [AutoHotkey v2](https://www.autohotkey.com/). Download [AutoHotInterception](https://github.com/evilC/AutoHotInterception/releases) and the [Interception driver](https://github.com/oblitum/Interception/releases). Follow AHI's [installation guide](https://github.com/evilC/AutoHotInterception#setup): install the driver from an administrator terminal with `install-interception.exe /install`, restart, and assemble the **AHK v2** folder with its `Lib` directory and the required DLLs.
-3. Run AHI's `Monitor.ahk` and identify Glove80's VID/PID. Verify it sees events from that connection; start with USB. From a native Windows terminal in this repository, run `just install "C:\path\to\AutoHotInterception\AHK v2"` (install [just](https://github.com/casey/just#installation) and [Python](https://www.python.org/downloads/windows/) first). This copies the helper and mapping files into the prepared folder. WSL is detected as Linux; use PowerShell for Windows host installation.
-4. Enter Glove80's VID/PID in the installed `settings.ini`, then run `Glove80.ahk`. The script intercepts only that device, reads the foreground application's English/Russian input language, and sends the corresponding text immediately. The laptop is never intercepted. It waits while Glove80 is absent and checks for reconnection every second.
-5. Test English, Russian, punctuation, shortcuts, and unplug/reconnect. To start automatically, place a shortcut to `Glove80.ahk` in the folder opened by **Win-R → `shell:startup`**. To stop, right-click its tray icon and choose **Exit**; remove the startup shortcut to disable automatic launch.
+2. Install [AutoHotkey v2](https://www.autohotkey.com/), for example with `winget install --id AutoHotkey.AutoHotkey --exact --source winget --scope user`. Download release ZIPs for [AutoHotInterception](https://github.com/evilC/AutoHotInterception/releases) and the [Interception driver](https://github.com/oblitum/Interception/releases); AHI's source-code ZIP does not contain all the compiled dependencies. In an **administrator PowerShell**, change to the driver's `command line installer` folder and run `./install-interception.exe /install`. **Restart Windows before running Monitor.** Installing the files alone does not load the driver.
+3. Assemble a permanent AHI working folder, for example `%LOCALAPPDATA%\Programs\Glove80`, following AHI's [installation guide](https://github.com/evilC/AutoHotInterception#setup). Copy the release's **AHK v2** contents there, copy `Common\Lib\AutoHotInterception.dll` into its `Lib` folder, and copy the driver's `library\x86` and `library\x64` folders into `Lib`. The required files are:
+
+   ```text
+   Glove80/
+     Monitor.ahk
+     Lib/
+       AutoHotInterception.ahk
+       AutoHotInterception.dll
+       CLR.ahk
+       x86/interception.dll
+       x64/interception.dll
+   ```
+
+4. Copy this repository's `host\windows\Glove80.ahk`, `layout.tsv`, and `settings.ini.example` into that working folder. For a first installation, copy `settings.ini.example` to `settings.ini`. Back up existing helper files before updating and preserve your `settings.ini`. **No Python, just, Docker, or firmware build is needed to copy the supplied host files.** Alternatively, with Python installed, run the following from a native Windows terminal in the repository:
+
+   ```powershell
+   $env:PYTHONUTF8 = '1'
+   python scripts/tasks.py install --directory "C:\path\to\Glove80"
+   ```
+
+   UTF-8 mode is needed for the Russian source files on Windows installations whose default Python encoding is not UTF-8. The environment variable also reaches the generator subprocess. If just is installed, `just install "C:\path\to\Glove80"` uses the same installer; set `PYTHONUTF8` there too. The installer copies the files, backs up changed files, and preserves existing settings. WSL is detected as Linux; use native Windows for this step.
+5. Open `Monitor.ahk` from the working folder with AutoHotkey v2. Identify the Glove80 row and select **only that keyboard's checkbox**, then press a few physical Glove80 keys and confirm its ID appears in the event list. Simulated typing does not verify this connection. USB is a useful fallback if Bluetooth is absent; connect the left half and select USB on the keyboard. Close Monitor after testing.
+6. Configure the verified keyboard in `settings.ini`:
+
+   - If Monitor shows nonzero VID/PID, enter those values and leave `Handle=` empty.
+   - **Bluetooth may show `0x0000, 0x0000` despite receiving events.** Use that row's **Handle Copy** button and paste the exact result after `Handle=` instead. A nonempty Handle takes precedence over VID/PID. Do not copy another keyboard's handle, use zero IDs as a wildcard, or substitute IDs from Device Manager: Interception may parse them differently. Use the Copy button rather than transcribing accessibility text, which can double the `&` characters for display.
+
+   USB and Bluetooth can have different handles/IDs. This configuration selects one connection; identify and update it if you change transport. The script looks up the matching device again every second after reconnecting, rather than saving Monitor's temporary numeric device ID.
+7. Run `Glove80.ahk` with AutoHotkey v2. It runs in the tray, so **no application window is expected**. It maps only the selected keyboard, reads the focused text editor's input language, and waits if that keyboard is disconnected. Test English and Russian text, Shift, punctuation, thumb shortcuts, and a reconnect. Include Notepad and a browser in the language test. Only after these checks pass, enable startup as described below.
+
+### Opening the helper and enabling startup
+
+The repository's installer **does not create Start menu or desktop shortcuts**, and neither does copying the files. Open `Monitor.ahk` or `Glove80.ahk` directly from your working folder. If double-click opens an editor or the wrong interpreter, use AutoHotkey v2 explicitly. For a per-user installation, an example PowerShell command is:
+
+```powershell
+& "$env:LOCALAPPDATA\Programs\AutoHotkey\v2\AutoHotkey64.exe" "$env:LOCALAPPDATA\Programs\Glove80\Glove80.ahk"
+```
+
+Replace the script name with `Monitor.ahk` for Monitor. Adjust both paths to your actual installation; an all-users AutoHotkey install may be under Program Files.
+
+For a convenient shortcut, use **Desktop → New → Shortcut**. Set its target to the quoted AutoHotkey v2 executable followed by the quoted full script path, and name it **Start Glove80** or **Glove80 Device Monitor**. Only shortcuts you create will appear on the desktop or in the Start menu.
+
+After testing, copy the **Start Glove80** shortcut into **Win-R → `shell:startup`**. It starts at the current user's sign-in, not immediately when copied. Do not put Monitor in startup. To stop the helper, right-click its AutoHotkey tray icon and choose **Exit**; remove the startup shortcut to disable future automatic launches.
+
+### Language switching and troubleshooting
 
 The default `SwapThumbs=1` maps Glove80's **left Command ↔ left Ctrl**, and **right Command → right Ctrl**. Thus the Command thumb positions become the usual Windows Ctrl shortcut positions, and the old left Ctrl position becomes Win. Set `SwapThumbs=0` to retain the Mac modifier arrangement. The map shows these default Windows labels when viewed on Windows.
 
 With `SwapThumbs=1`, **Cursor → EN / RU** becomes Win-Space and cycles Windows input sources. Keep only US English and Russian enabled for a two-language cycle. With `SwapThumbs=0`, the key sends Control-Space; use Win-Space manually instead.
 
-AHI must detect the selected connection in Monitor; Bluetooth support is device/driver-dependent. Its driver has a [known reconnect/hibernate limitation](https://github.com/evilC/AutoHotInterception#known-issues): repeated reconnects can exhaust keyboard IDs and require a reboot. Ordinary text uses Windows Unicode input; applications that require raw keyboard events may need the standard build. For elevated applications, run the helper at the same elevation. The script has not been hardware-tested on Windows.
+If the Windows language indicator changes but Notepad keeps typing in the old language, update the installed `Glove80.ahk` and restart the helper. Modern Notepad can host its editor on a different thread from its main window. The helper uses [GetGUIThreadInfo](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getguithreadinfo) to find the focused editor before querying its keyboard layout; older copies queried only the main window. The Windows indicator changing alone does not verify the helper's language detection.
+
+AHI must detect physical events from the selected connection in Monitor; Bluetooth support is device/driver-dependent. Bluetooth input and English/Russian switching, including the Notepad fix, were verified on one Windows PC with AutoHotkey 2.0.27, AutoHotInterception 0.9.2, and Interception 1.0.1. This does not establish compatibility with every Bluetooth driver. Interception has a [known reconnect/hibernate limitation](https://github.com/evilC/AutoHotInterception#known-issues): repeated reconnects can exhaust keyboard IDs and require a reboot. Ordinary text uses Windows Unicode input; applications that require raw keyboard events may need the standard build. For elevated applications, run the helper at the same elevation.
+
+To remove the setup, exit the helper and remove its startup shortcut. Run `./install-interception.exe /uninstall` from the driver's installer folder in an administrator PowerShell, then restart. AutoHotkey can be removed through Windows Installed apps if nothing else uses it. Use the standard firmware when continuing without the bilingual helper.
 
 ## Linux
 

@@ -1,7 +1,10 @@
 [Glove80]
-; Copy to settings.ini. Read these IDs in AutoHotInterception's Monitor.ahk.
-; Only this exact keyboard is intercepted. Do not use the laptop's IDs.
+; Copy to settings.ini. Identify Glove80 using AutoHotInterception's Monitor.ahk.
+; Use nonzero VID/PID, or paste the exact Handle with that row's Handle Copy button.
+; Handle takes precedence when nonempty (needed for Bluetooth reporting 0x0000 IDs).
+; Never use another keyboard's IDs/handle. USB and Bluetooth can differ.
 VID=0x0000
 PID=0x0000
+Handle=
 ; Swap the Command and Control thumb roles on Glove80 only.
 SwapThumbs=1

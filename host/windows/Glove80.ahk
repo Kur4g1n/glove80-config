@@ -1,4 +1,4 @@
-#Requires AutoHotkey v2.0
+﻿#Requires AutoHotkey v2.0
 #SingleInstance Force
 #Include Lib\AutoHotInterception.ahk
 
@@ -7,13 +7,14 @@
 Persistent
 SetWorkingDir(A_ScriptDir)
 if !FileExist("settings.ini") {
-    MsgBox("Copy settings.ini.example to settings.ini and enter Glove80's VID/PID from Monitor.ahk.")
+    MsgBox("Copy settings.ini.example to settings.ini and enter Glove80's VID/PID or exact Handle from Monitor.ahk.")
     ExitApp
 }
 VID := Integer(IniRead("settings.ini", "Glove80", "VID", "0"))
 PID := Integer(IniRead("settings.ini", "Glove80", "PID", "0"))
-if !VID || !PID {
-    MsgBox("Set Glove80's exact VID/PID in settings.ini. No keyboard has been intercepted.")
+DeviceHandle := IniRead("settings.ini", "Glove80", "Handle", "")
+if DeviceHandle = "" && (!VID || !PID) {
+    MsgBox("Set Glove80's nonzero VID/PID or exact Handle in settings.ini. No keyboard has been intercepted.")
     ExitApp
 }
 SwapThumbs := Integer(IniRead("settings.ini", "Glove80", "SwapThumbs", "1"))
@@ -40,7 +41,7 @@ Connect() {
     global Device
     ; The wrapper's GetKeyboardId exits the app when absent; the underlying
     ; lookup returns zero, so the helper can wait for a disconnected keyboard.
-    found := AHI.Instance.GetDeviceId(false, VID, PID, 1)
+    found := DeviceHandle != "" ? AHI.Instance.GetDeviceIdFromHandle(false, DeviceHandle, 1) : AHI.Instance.GetDeviceId(false, VID, PID, 1)
     if found = Device
         return
     Stop()
@@ -67,9 +68,17 @@ Stop(*) {
 Held(scan) => Physical.Has(scan)
 
 Russian() {
+    ; Modern editors can host text input on a different thread from the frame.
     hwnd := DllCall("GetForegroundWindow", "Ptr")
-    thread := DllCall("GetWindowThreadProcessId", "Ptr", hwnd, "Ptr", 0, "UInt")
-    return (DllCall("GetKeyboardLayout", "UInt", thread, "UPtr") & 0xFFFF) = 0x0419
+    info := Buffer(8 + 6 * A_PtrSize + 16, 0)
+    NumPut("UInt", info.Size, info)
+    if DllCall("GetGUIThreadInfo", "UInt", 0, "Ptr", info) {
+        focus := NumGet(info, 8 + A_PtrSize, "Ptr")
+        if focus
+            hwnd := focus
+    }
+    threadId := DllCall("GetWindowThreadProcessId", "Ptr", hwnd, "Ptr", 0, "UInt")
+    return (DllCall("GetKeyboardLayout", "UInt", threadId, "UPtr") & 0xFFFF) = 0x0419
 }
 
 UnicodeKey(codepoint) {
