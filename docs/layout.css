@@ -50,6 +50,7 @@ h1 { font-size:clamp(23px,2.4vw,32px); font-weight:550; letter-spacing:-.025em; 
 .key-rim { fill:none; stroke:color-mix(in srgb,var(--key-bg) 72%,white); stroke-width:.018; opacity:.65; pointer-events:none; }
 .key text { fill:var(--key-fg); pointer-events:none; dominant-baseline:central; text-anchor:middle; font-weight:600; }
 .key .legend { font-size:.235px; }
+.key .key-icon { fill:none; stroke:var(--key-fg); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; pointer-events:none; }
 .key .legend.medium { font-size:.205px; }
 .key .legend.long { font-size:.16px; }
 .key .shifted { font-size:.14px; font-weight:450; }

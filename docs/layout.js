@@ -62,6 +62,10 @@
     if(shouldLock){locked=target;render();}
   }
 
+  const keyIcons={
+    '⇧':{name:'Shift',path:'m12 3 9 9h-5v9H8v-9H3Z'},
+    '⌫':{name:'Backspace',path:'M9 5H22V19H9L2 12ZM12 9l6 6m0-6-6 6'}
+  };
   const keys=data.geometry.map((g,pos)=>{
     const x=g.x,y=g.y,group=element('g',{class:'key','data-position':pos});
     if(g.r)group.setAttribute('transform',`rotate(${g.r} ${g.rx} ${g.ry})`);
@@ -70,10 +74,11 @@
     const rim=element('path',{class:'key-rim',d:`M${x+.14} ${y+.075}h.72M${x+.10} ${y+.12}v.65`});
     const pulse=element('circle',{class:'layer-pulse',cx:x+.5,cy:y+.46,r:.33});
     const legend=element('text',{class:'legend',x:x+.5,y:y+.5});
+    const icon=element('path',{class:'key-icon',transform:`translate(${x+.308} ${y+.288}) scale(.016)`,'aria-hidden':'true'});
     const upper=element('text',{class:'shifted',x:x+.5,y:y+.18});
     const mark=element('path',{class:'lock-mark',d:`M${x+.73} ${y+.66}v-.08a.06.06 0 0 1 .12 0v.08m-.14 0h.16v.13h-.16z`});
     const title=element('title');
-    group.append(title,shell,face,rim,pulse,legend,upper,mark);
+    group.append(title,shell,face,rim,pulse,legend,icon,upper,mark);
     if(pos===38 || pos===41)group.append(element('path',{class:'home-mark',d:`M${x+.40} ${y+.79}h.20`}));
     let pointerInside=false;
     const target=()=>layers()[selected][pos].target;
@@ -89,7 +94,7 @@
         event.preventDefault();if(languageKey())toggleLanguage();else choose(target());
       }
     });
-    svg.append(group);return {group,legend,upper,title,pos};
+    svg.append(group);return {group,legend,icon,upper,title,pos};
   });
   svg.append(coordinates);
   function updateHighlights(){
@@ -149,7 +154,7 @@
     document.querySelector('.shift-hint').hidden=layer!==0;
     document.querySelector('.layer-state').textContent=locked===layer?'Locked':'';
     svg.setAttribute('aria-label',`Glove80, ${data.names[layer]} layer`);
-    for(const {group,legend,upper,title,pos} of keys){
+    for(const {group,legend,icon,upper,title,pos} of keys){
       const key=layers()[layer][pos],target=key.target;
       let label=shifted && key.shifted?key.shifted:key.label;
       if(windows){
@@ -162,10 +167,12 @@
       group.dataset.disabled=String(key.binding==='&none');group.dataset.active=String(target===layer);
       const languageKey=key.binding==='&kp LC(SPACE)';
       group.dataset.locked=String(isLocked);group.dataset.interactive=String(target!==null || languageKey);
-      legend.textContent=label;legend.setAttribute('class',`legend${label.length>7?' long':label.length>5?' medium':''}`);
+      const symbol=keyIcons[label];
+      legend.textContent=symbol?'':label;legend.setAttribute('class',`legend${label.length>7?' long':label.length>5?' medium':''}`);
+      icon.setAttribute('d',symbol?symbol.path:'');
       upper.textContent=/^\p{L}$/u.test(key.label)?'':shifted?(key.label===label?'':key.label):key.shifted;
       const hint=languageKey?' — Switch diagram language':target===null?'':target===3?' — RGB status on an unused tap':locked===target?' — Press to unlock':selected===3?' — Lock layer':' — Click to lock; on touch, tap again';
-      const accessible=`${data.geometry[pos].label}: ${label || 'unassigned'}${hint}`;
+      const accessible=`${data.geometry[pos].label}: ${symbol?symbol.name:label || 'unassigned'}${hint}`;
       group.setAttribute('aria-label',accessible);title.textContent=accessible;
       // Focusability follows the selected map: previews cannot remove their own focus target.
       const interactive=layers()[selected][pos].target!==null || layers()[selected][pos].binding==='&kp LC(SPACE)';
