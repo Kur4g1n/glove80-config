@@ -13,16 +13,31 @@ class Node {
   addEventListener(type,fn){(this.events[type]??=[]).push(fn);}
   fire(type,props={}){return Promise.all((this.events[type]??[]).map(fn=>fn({currentTarget:this,pointerType:'mouse',detail:1,preventDefault(){},...props})));}
 }
-function app(userAgent='Macintosh'){
+function app(userAgent='Macintosh',{systemLight=false,storage=new Map(),storageBlocked=false}={}){
   const nodes=new Map();
   const document=new Node();document.documentElement=new Node();
   document.querySelector=selector=>{if(!nodes.has(selector))nodes.set(selector,new Node());return nodes.get(selector);};
   document.createElement=tag=>new Node(tag);document.createElementNS=(_,tag)=>new Node(tag);
-  const window=new Node(),context={window,document,console,navigator:{userAgent},matchMedia:()=>({matches:false}),localStorage:{getItem(){return null;},setItem(){}}};
+  const media=new Node();media.matches=systemLight;
+  const window=new Node(),context={window,document,console,navigator:{userAgent},matchMedia:()=>media,localStorage:{getItem(key){if(storageBlocked)throw Error('Storage blocked');return storage.get(key)??null;},setItem(key,value){if(storageBlocked)throw Error('Storage blocked');storage.set(key,value);}}};
   vm.createContext(context);
   vm.runInContext(fs.readFileSync('docs/layout-data.js','utf8'),context);
   vm.runInContext(fs.readFileSync('docs/layout.js','utf8'),context);
-  return {nodes,document,window,key:pos=>nodes.get('#keyboard').children.find(k=>k.dataset.position===String(pos)),title:()=>nodes.get('#layer-title').textContent.replace(/ layer$/,'')};
+  return {nodes,document,window,media,storage,key:pos=>nodes.get('#keyboard').children.find(k=>k.dataset.position===String(pos)),title:()=>nodes.get('#layer-title').textContent.replace(/ layer$/,'')};
+}
+{
+  const a=app('Windows',{systemLight:true,storage:new Map([['glove80-theme','dark']])});
+  const theme=()=>a.document.documentElement.dataset.theme;
+  assert.equal(theme(),'light');
+  assert.equal(a.storage.has('glove80-theme-preference'),false);
+  a.media.matches=false;a.media.fire('change');assert.equal(theme(),'dark');
+  assert.equal(a.storage.has('glove80-theme-preference'),false);
+  a.nodes.get('.theme-toggle').fire('click');assert.equal(theme(),'light');
+  a.media.fire('change');assert.equal(theme(),'light');
+  assert.equal(app('Windows',{storage:a.storage}).document.documentElement.dataset.theme,'light');
+  const b=app('Windows',{systemLight:true,storageBlocked:true});
+  assert.equal(b.document.documentElement.dataset.theme,'light');
+  b.nodes.get('.theme-toggle').fire('click');assert.equal(b.document.documentElement.dataset.theme,'dark');
 }
 {
   const a=app();assert.equal(a.title(),'Base');

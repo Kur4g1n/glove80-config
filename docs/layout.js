@@ -195,12 +195,20 @@
     themeButton.textContent=theme==='dark'?'☼':'☾';
     themeButton.setAttribute('aria-label',`Switch to ${theme==='dark'?'light':'dark'} theme`);
     document.querySelector('meta[name="theme-color"]').content=theme==='dark'?'#24273a':'#eff1f5';
-    try{localStorage.setItem('glove80-theme',theme);}catch{/* Local file/private mode still supports switching. */}
   }
-  let theme=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
-  try{const saved=localStorage.getItem('glove80-theme');if(['light','dark'].includes(saved))theme=saved;}catch{}
-  setTheme(theme);
-  themeButton.addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'));
+  const systemTheme=matchMedia('(prefers-color-scheme: light)');
+  // The old key also stored automatic defaults, so it cannot identify a user choice.
+  const themePreferenceKey='glove80-theme-preference';
+  let preferredTheme=null;
+  try{const saved=localStorage.getItem(themePreferenceKey);if(['light','dark'].includes(saved))preferredTheme=saved;}catch{}
+  const applyTheme=()=>setTheme(preferredTheme??(systemTheme.matches?'light':'dark'));
+  applyTheme();
+  systemTheme.addEventListener('change',applyTheme);
+  themeButton.addEventListener('click',()=>{
+    preferredTheme=document.documentElement.dataset.theme==='dark'?'light':'dark';
+    applyTheme();
+    try{localStorage.setItem(themePreferenceKey,preferredTheme);}catch{/* Switching still works without storage. */}
+  });
   document.querySelector('.pdf-download').addEventListener('click',async event=>{
     const button=event.currentTarget,status=document.querySelector('.download-status');button.disabled=true;status.textContent='Preparing PDF…';
     try{

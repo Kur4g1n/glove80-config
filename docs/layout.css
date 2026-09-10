@@ -10,6 +10,12 @@
   --key-highlight:#8c95a8; --surface0:#ccd0da; --pink:#8839ef; --mauve:#8839ef; --red:#d20f39;
 }
 * { box-sizing:border-box; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme:light; --base:#eff1f5; --mantle:#e6e9ef; --text:#4c4f69; --subtext0:#5c5f77;
+    --key-highlight:#8c95a8; --surface0:#ccd0da; --pink:#8839ef; --mauve:#8839ef; --red:#d20f39;
+  }
+}
 body { margin:0; background:var(--base); color:var(--text); }
 main { width:min(100%,1440px); margin:0 auto; padding:24px clamp(16px,3vw,44px) 32px; }
 .masthead { display:flex; justify-content:flex-end; min-height:44px; }
