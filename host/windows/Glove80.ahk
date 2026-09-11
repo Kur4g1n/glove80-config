@@ -142,7 +142,8 @@ KeyEvent(scan, state) {
         }
         pair := Held(0x138) ? 5 : isRussian ? 3 : 1
         lower := values[pair]
-        shifted := Held(0x2A) || Held(0x36)
+        ; AutoHotInterception reports right Shift as 0x136 (observed on Bluetooth).
+        shifted := Held(0x2A) || Held(0x136) || Held(0x36)
         if lower && RegExMatch(Chr(lower), "^[A-Za-zА-Яа-яЁё]$") && GetKeyState("CapsLock", "T")
             shifted := !shifted
         char := values[pair + (shifted ? 1 : 0)]
