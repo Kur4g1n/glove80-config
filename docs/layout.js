@@ -5,11 +5,18 @@
   const shiftButton=document.querySelector('.shift-toggle'), themeButton=document.querySelector('.theme-toggle');
   const languageButton=document.querySelector('.language-toggle');
   let language='en';
-  const platformSelect=document.querySelector('.platform-select');
+  const platformButton=document.querySelector('.platform-toggle');
+  const platforms=['macos','windows','linux'],platformNames={macos:'macOS',windows:'Windows',linux:'Linux'};
   const userAgent=typeof navigator!=='undefined'?navigator.userAgent:'';
   let platform=/Windows/.test(userAgent)?'windows':/Linux/.test(userAgent)&&!/Android/.test(userAgent)?'linux':'macos';
   try{const saved=localStorage.getItem('glove80-platform');if(['macos','windows','linux'].includes(saved))platform=saved;}catch{}
-  platformSelect.value=platform;
+  function updatePlatformButton(){
+    const next=platforms[(platforms.indexOf(platform)+1)%platforms.length];
+    platformButton.dataset.platform=platform;
+    platformButton.setAttribute('aria-label',`Platform: ${platformNames[platform]}. Show ${platformNames[next]} thumb keys`);
+    platformButton.setAttribute('title',`${platformNames[platform]} · Click for ${platformNames[next]}`);
+  }
+  updatePlatformButton();
   const layers=()=>data.languages[language].layers;
   const categoryLabel=label=>platform==='windows'?({'Command':'Control','Control':'Windows','Alt · Option':'Alt'}[label]??label):platform==='linux'?({'Command':'Super','Alt · Option':'Alt'}[label]??label):label;
   const legendPanel=document.querySelector('.color-legend');
@@ -198,9 +205,9 @@
     render();
   }
   languageButton.addEventListener('click',toggleLanguage);
-  platformSelect.addEventListener('change',()=>{
-    if(!['macos','windows','linux'].includes(platformSelect.value))return;
-    platform=platformSelect.value;
+  platformButton.addEventListener('click',()=>{
+    platform=platforms[(platforms.indexOf(platform)+1)%platforms.length];
+    updatePlatformButton();
     legendLayer=-1;
     try{localStorage.setItem('glove80-platform',platform);}catch{}
     render();

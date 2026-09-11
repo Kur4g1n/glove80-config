@@ -20,14 +20,17 @@ body { margin:0; background:var(--base); color:var(--text); }
 main { width:min(100%,1440px); margin:0 auto; padding:24px clamp(16px,3vw,44px) 32px; }
 .masthead { display:flex; justify-content:flex-end; min-height:44px; }
 .tools { display:flex; align-items:center; gap:8px; }
-.platform-select { font:inherit; font-size:13px; font-weight:650; min-height:44px; width:104px; padding:0 8px; border:0; border-radius:7px; color:var(--subtext0); background:var(--base); cursor:pointer; }
-.platform-select:hover { color:var(--text); background:var(--surface0); }
-.platform-select:focus-visible { outline:2px solid var(--pink); outline-offset:3px; }
+.platform-toggle svg { display:none; }
+.platform-toggle[data-platform="macos"] .os-macos,
+.platform-toggle[data-platform="windows"] .os-windows,
+.platform-toggle[data-platform="linux"] .os-linux { display:block; }
 button { font:inherit; cursor:pointer; border:0; color:var(--subtext0); background:transparent; border-radius:7px; min-height:44px; }
 button:hover:not(:disabled) { color:var(--text); background:var(--surface0); }
 button:focus-visible { outline:2px solid var(--pink); outline-offset:3px; }
 .tool { width:44px; display:grid; place-items:center; font-size:23px; }
 .tool svg { width:20px; height:20px; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; fill:none; }
+.platform-toggle .os-macos, .platform-toggle .os-windows { fill:currentColor; stroke:none; }
+.platform-toggle .os-linux { width:22px; height:22px; stroke-width:1.5; }
 .theme-toggle .icon-moon, :root[data-theme="light"] .theme-toggle .icon-sun { display:none; }
 :root[data-theme="light"] .theme-toggle .icon-moon { display:block; }
 .tool[aria-pressed="true"] { color:#181926; background:#f5bde6; }

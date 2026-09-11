@@ -128,23 +128,23 @@ function app(userAgent='Macintosh',{systemLight=false,storage=new Map(),storageB
   assert.equal(label(53),'Ctrl');assert.equal(label(54),'Win');assert.equal(label(56),'Ctrl');
 }
 {
-  const a=app('Windows NT 10.0'),select=a.nodes.get('.platform-select');
+  const a=app('Windows NT 10.0'),select=a.nodes.get('.platform-toggle');
   const labels=()=>[53,54,56].map(pos=>a.key(pos).children.find(n=>n.attrs.class?.startsWith('legend')).textContent);
-  assert.equal(select.value,'windows');
-  select.value='macos';select.fire('change');
+  assert.equal(select.dataset.platform,'windows');
+  select.fire('click');select.fire('click');
   const mac=app();
   assert.deepEqual(labels(),[53,54,56].map(pos=>mac.key(pos).children.find(n=>n.attrs.class?.startsWith('legend')).textContent));
-  select.value='linux';select.fire('change');
+  select.fire('click');select.fire('click');
   assert.deepEqual(labels(),['Super','Ctrl','Super']);
   a.nodes.get('.language-toggle').fire('click');a.nodes.get('.shift-toggle').fire('click');
   assert.deepEqual(labels(),['Super','Ctrl','Super']);
   assert.ok([53,54,56].every(pos=>a.key(pos).children.find(n=>n.attrs.class==='shifted').textContent===''));
-  select.value='windows';select.fire('change');
+  select.fire('click');select.fire('click');
   assert.deepEqual(labels(),['Ctrl','Win','Ctrl']);
-  assert.equal(app('Macintosh',{storage:a.storage}).nodes.get('.platform-select').value,'windows');
-  assert.equal(app('Linux x86_64').nodes.get('.platform-select').value,'linux');
+  assert.equal(app('Macintosh',{storage:a.storage}).nodes.get('.platform-toggle').dataset.platform,'windows');
+  assert.equal(app('Linux x86_64').nodes.get('.platform-toggle').dataset.platform,'linux');
   const blocked=app('Windows',{storageBlocked:true});
-  blocked.nodes.get('.platform-select').value='macos';blocked.nodes.get('.platform-select').fire('change');
+  blocked.nodes.get('.platform-toggle').fire('click');blocked.nodes.get('.platform-toggle').fire('click');
   assert.equal(blocked.key(53).getAttribute('aria-label'),mac.key(53).getAttribute('aria-label'));
 }
 {

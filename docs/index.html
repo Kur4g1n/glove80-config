@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#24273a">
   <title>Glove80 · Enthium v14</title>
-  <link rel="stylesheet" href="layout.css?v=4">
+  <link rel="stylesheet" href="layout.css?v=5">
   <script src="layout-data.js" defer></script>
   <script src="pdf.js" defer></script>
-  <script src="layout.js?v=4" defer></script>
+  <script src="layout.js?v=5" defer></script>
 </head>
 <body>
   <main aria-label="Glove80 keyboard layout">
     <header class="masthead">
       <div class="tools">
         <button class="tool language-toggle" type="button" aria-label="Show Russian layout" title="English / Russian layout" aria-pressed="false">EN</button>
-        <select class="platform-select" aria-label="Platform" title="Preview thumb keys for your platform">
-          <option value="macos">macOS</option>
-          <option value="windows">Windows</option>
-          <option value="linux">Linux</option>
-        </select>
+        <button class="tool platform-toggle" type="button" aria-label="Platform: macOS. Show Windows thumb keys" title="macOS · Click for Windows" data-platform="macos">
+          <svg class="os-macos" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 2c0 2-1.5 4-3.5 4C12.5 4 14 2 16 2ZM20 17c-1 2.5-2.5 5-4.5 5-1 0-2-.8-3.5-.8s-2.5.8-3.5.8C6 22 3 17 3 12.5 3 9 5.5 7 8 7c1.5 0 2.5 1 4 1s2.5-1 4-1c1.8 0 3.1.8 4 2-3.5 2-3.5 6 0 8Z"/></svg>
+          <svg class="os-windows" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h8v8H3ZM13 3h8v8h-8ZM3 13h8v8H3ZM13 13h8v8h-8Z"/></svg>
+          <svg class="os-linux" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8c0-4 1.5-6 4-6s4 2 4 6c0 3 4 5 4 9l-3 2H7l-3-2c0-4 4-6 4-9Z"/><ellipse cx="12" cy="14" rx="4" ry="5"/><path d="m10 8 2-1 2 1-2 2ZM7 18l-4 3h6l1-2m7-1 4 3h-6l-1-2"/><circle cx="10.5" cy="5.5" r=".6"/><circle cx="13.5" cy="5.5" r=".6"/></svg>
+        </button>
         <button class="tool shift-toggle" type="button" aria-label="Show shifted legends" title="Shift legends" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 9h-5v9H8v-9H3Z"/></svg></button>
         <button class="tool theme-toggle" type="button" aria-label="Switch to light theme" title="Light / dark theme"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.5A9 9 0 0 1 10.5 3a9 9 0 1 0 10 10.5Z"/></svg></button>
         <button class="tool pdf-download" type="button" aria-label="Download all five layers as PDF" title="Download all five layers as PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v5h14v-5"/></svg></button>
