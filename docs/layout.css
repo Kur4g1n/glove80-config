@@ -20,6 +20,9 @@ body { margin:0; background:var(--base); color:var(--text); }
 main { width:min(100%,1440px); margin:0 auto; padding:24px clamp(16px,3vw,44px) 32px; }
 .masthead { display:flex; justify-content:flex-end; min-height:44px; }
 .tools { display:flex; align-items:center; gap:8px; }
+.platform-select { font:inherit; font-size:13px; font-weight:650; min-height:44px; width:104px; padding:0 8px; border:0; border-radius:7px; color:var(--subtext0); background:var(--base); cursor:pointer; }
+.platform-select:hover { color:var(--text); background:var(--surface0); }
+.platform-select:focus-visible { outline:2px solid var(--pink); outline-offset:3px; }
 button { font:inherit; cursor:pointer; border:0; color:var(--subtext0); background:transparent; border-radius:7px; min-height:44px; }
 button:hover:not(:disabled) { color:var(--text); background:var(--surface0); }
 button:focus-visible { outline:2px solid var(--pink); outline-offset:3px; }

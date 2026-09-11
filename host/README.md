@@ -88,7 +88,7 @@ After testing, copy the **Start Glove80** shortcut into **Win-R → `shell:start
 
 ### Language switching and troubleshooting
 
-The default `SwapThumbs=1` maps Glove80's **left Command ↔ left Ctrl**, and **right Command → right Ctrl**. Thus the Command thumb positions become the usual Windows Ctrl shortcut positions, and the old left Ctrl position becomes Win. Set `SwapThumbs=0` to retain the Mac modifier arrangement. The map shows these default Windows labels when viewed on Windows.
+The default `SwapThumbs=1` maps Glove80's **left Command ↔ left Ctrl**, and **right Command → right Ctrl**. Thus the Command thumb positions become the usual Windows Ctrl shortcut positions, and the old left Ctrl position becomes Win. Set `SwapThumbs=0` to retain the Mac modifier arrangement. The map's platform selector beside EN/RU defaults to the detected platform and remembers your choice. Choose Windows to preview the default swap, macOS for the original Command/Ctrl arrangement (also used with `SwapThumbs=0`), or Linux for the original positions with Super labels. This changes only the diagram, including its PDF export; it does not configure the keyboard.
 
 With `SwapThumbs=1`, **Cursor → EN / RU** becomes Win-Space and cycles Windows input sources. Keep only US English and Russian enabled for a two-language cycle. With `SwapThumbs=0`, the key sends Control-Space; use Win-Space manually instead.
 

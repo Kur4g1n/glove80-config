@@ -5,8 +5,13 @@
   const shiftButton=document.querySelector('.shift-toggle'), themeButton=document.querySelector('.theme-toggle');
   const languageButton=document.querySelector('.language-toggle');
   let language='en';
-  const windows=typeof navigator!=='undefined' && /Windows/.test(navigator.userAgent);
+  const platformSelect=document.querySelector('.platform-select');
+  const userAgent=typeof navigator!=='undefined'?navigator.userAgent:'';
+  let platform=/Windows/.test(userAgent)?'windows':/Linux/.test(userAgent)&&!/Android/.test(userAgent)?'linux':'macos';
+  try{const saved=localStorage.getItem('glove80-platform');if(['macos','windows','linux'].includes(saved))platform=saved;}catch{}
+  platformSelect.value=platform;
   const layers=()=>data.languages[language].layers;
+  const categoryLabel=label=>platform==='windows'?({'Command':'Control','Control':'Windows','Alt · Option':'Alt'}[label]??label):platform==='linux'?({'Command':'Super','Alt · Option':'Alt'}[label]??label):label;
   const legendPanel=document.querySelector('.color-legend');
   const overviews=[
     'Enthium typing with dedicated modifiers, numbers, and function keys.',
@@ -119,9 +124,9 @@
     mainLabels.add(data.roles['layer.active'].label);mainLabels.add(data.roles['layer.locked'].label);
     const buttons=[...unique.values()].sort((a,b)=>categoryOrder.indexOf(a.label)-categoryOrder.indexOf(b.label)).map(role=>{
       const button=document.createElement('button');button.type='button';button.className='swatch-button';
-      button.dataset.category=role.label;button.dataset.disabled=String(role.rgb==='#000000');button.setAttribute('aria-label',`Highlight ${role.label} keys`);
+      button.dataset.category=role.label;button.dataset.disabled=String(role.rgb==='#000000');button.setAttribute('aria-label',`Highlight ${categoryLabel(role.label)} keys`);
       const swatch=document.createElement('span');swatch.className='swatch';swatch.style.setProperty('--swatch',role.background);swatch.setAttribute('aria-hidden','true');
-      const label=document.createElement('span');label.className='swatch-label';label.textContent=role.label;
+      const label=document.createElement('span');label.className='swatch-label';label.textContent=categoryLabel(role.label);
       button.append(swatch,label);
       const enter=()=>{hoveredGroup=role.label;updateHighlights();},leave=()=>{hoveredGroup=null;updateHighlights();};
       button.addEventListener('pointerenter',enter);button.addEventListener('pointerleave',leave);
@@ -157,10 +162,12 @@
     for(const {group,legend,icon,upper,title,pos} of keys){
       const key=layers()[layer][pos],target=key.target;
       let label=shifted && key.shifted?key.shifted:key.label;
-      if(windows){
+      if(platform==='windows'){
         if(['&kp LGUI','&kp RGUI'].includes(key.binding))label='Ctrl';
         if(key.binding==='&kp LCTRL')label='Win';
       }
+      if(platform==='linux' && ['&kp LGUI','&kp RGUI'].includes(key.binding))label='Super';
+      if(platform!=='macos' && key.binding==='&kp LALT')label='Alt';
       const isLocked=target!==null && locked===target, colors=isLocked?data.roles['layer.locked']:key;
       group.style.setProperty('--key-bg',colors.background);group.style.setProperty('--key-fg',colors.foreground);
       group.dataset.category=data.roles[isLocked?'layer.locked':key.role].label;
@@ -170,7 +177,7 @@
       const symbol=keyIcons[label];
       legend.textContent=symbol?'':label;legend.setAttribute('class',`legend${label.length>7?' long':label.length>5?' medium':''}`);
       icon.setAttribute('d',symbol?symbol.path:'');
-      upper.textContent=/^\p{L}$/u.test(key.label)?'':shifted?(key.label===label?'':key.label):key.shifted;
+      upper.textContent=/^\p{L}$/u.test(key.label)||['&kp LGUI','&kp RGUI','&kp LCTRL','&kp LALT'].includes(key.binding)?'':shifted?(key.label===label?'':key.label):key.shifted;
       const hint=languageKey?' — Switch diagram language':target===null?'':target===3?' — RGB status on an unused tap':locked===target?' — Press to unlock':selected===3?' — Lock layer':' — Click to lock; on touch, tap again';
       const accessible=`${data.geometry[pos].label}: ${symbol?symbol.name:label || 'unassigned'}${hint}`;
       group.setAttribute('aria-label',accessible);title.textContent=accessible;
@@ -191,6 +198,13 @@
     render();
   }
   languageButton.addEventListener('click',toggleLanguage);
+  platformSelect.addEventListener('change',()=>{
+    if(!['macos','windows','linux'].includes(platformSelect.value))return;
+    platform=platformSelect.value;
+    legendLayer=-1;
+    try{localStorage.setItem('glove80-platform',platform);}catch{}
+    render();
+  });
   document.addEventListener('keydown',event=>{
     if(event.key==='Escape'){select(0);document.activeElement?.blur();}
     if(event.key==='Shift'&&!shiftHeld){shiftHeld=true;render();}

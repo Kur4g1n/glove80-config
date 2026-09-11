@@ -5,16 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#24273a">
   <title>Glove80 · Enthium v14</title>
-  <link rel="stylesheet" href="layout.css?v=3">
+  <link rel="stylesheet" href="layout.css?v=4">
   <script src="layout-data.js" defer></script>
   <script src="pdf.js" defer></script>
-  <script src="layout.js?v=3" defer></script>
+  <script src="layout.js?v=4" defer></script>
 </head>
 <body>
   <main aria-label="Glove80 keyboard layout">
     <header class="masthead">
       <div class="tools">
         <button class="tool language-toggle" type="button" aria-label="Show Russian layout" title="English / Russian layout" aria-pressed="false">EN</button>
+        <select class="platform-select" aria-label="Platform" title="Preview thumb keys for your platform">
+          <option value="macos">macOS</option>
+          <option value="windows">Windows</option>
+          <option value="linux">Linux</option>
+        </select>
         <button class="tool shift-toggle" type="button" aria-label="Show shifted legends" title="Shift legends" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 9h-5v9H8v-9H3Z"/></svg></button>
         <button class="tool theme-toggle" type="button" aria-label="Switch to light theme" title="Light / dark theme"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 13.5A9 9 0 0 1 10.5 3a9 9 0 1 0 10 10.5Z"/></svg></button>
         <button class="tool pdf-download" type="button" aria-label="Download all five layers as PDF" title="Download all five layers as PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v5h14v-5"/></svg></button>

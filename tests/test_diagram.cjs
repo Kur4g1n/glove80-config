@@ -128,6 +128,26 @@ function app(userAgent='Macintosh',{systemLight=false,storage=new Map(),storageB
   assert.equal(label(53),'Ctrl');assert.equal(label(54),'Win');assert.equal(label(56),'Ctrl');
 }
 {
+  const a=app('Windows NT 10.0'),select=a.nodes.get('.platform-select');
+  const labels=()=>[53,54,56].map(pos=>a.key(pos).children.find(n=>n.attrs.class?.startsWith('legend')).textContent);
+  assert.equal(select.value,'windows');
+  select.value='macos';select.fire('change');
+  const mac=app();
+  assert.deepEqual(labels(),[53,54,56].map(pos=>mac.key(pos).children.find(n=>n.attrs.class?.startsWith('legend')).textContent));
+  select.value='linux';select.fire('change');
+  assert.deepEqual(labels(),['Super','Ctrl','Super']);
+  a.nodes.get('.language-toggle').fire('click');a.nodes.get('.shift-toggle').fire('click');
+  assert.deepEqual(labels(),['Super','Ctrl','Super']);
+  assert.ok([53,54,56].every(pos=>a.key(pos).children.find(n=>n.attrs.class==='shifted').textContent===''));
+  select.value='windows';select.fire('change');
+  assert.deepEqual(labels(),['Ctrl','Win','Ctrl']);
+  assert.equal(app('Macintosh',{storage:a.storage}).nodes.get('.platform-select').value,'windows');
+  assert.equal(app('Linux x86_64').nodes.get('.platform-select').value,'linux');
+  const blocked=app('Windows',{storageBlocked:true});
+  blocked.nodes.get('.platform-select').value='macos';blocked.nodes.get('.platform-select').fire('change');
+  assert.equal(blocked.key(53).getAttribute('aria-label'),mac.key(53).getAttribute('aria-label'));
+}
+{
   const {pdfBytes}=require('../docs/pdf.js');
   // Binary image data must not corrupt xref offsets or stream lengths.
   const pdf=Buffer.from(pdfBytes(Array.from({length:5},()=>Uint8Array.from([0xff,0xd8,0x80,0,0xff,0xd9]))));
