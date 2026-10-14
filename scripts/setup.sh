@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
+# Install the build tools with Homebrew and start the Docker runtime (Colima).
 set -euo pipefail
-cd "$(dirname "$0")/.."
-# Bootstrap Python before invoking the Python-based dependency installer.
-if ! command -v python3 >/dev/null 2>&1; then
-    if [[ "$(uname -s)" == Darwin ]] && command -v brew >/dev/null 2>&1; then
-        brew install python
-    else
-        echo 'Install Python 3, then run just setup again.' >&2
-        exit 1
-    fi
-fi
-exec python3 scripts/tasks.py setup
+command -v brew >/dev/null || { echo 'Install Homebrew first: https://brew.sh' >&2; exit 1; }
+brew install just python docker colima
+docker info >/dev/null 2>&1 || colima start --cpu 4 --memory 8
+docker info >/dev/null
+echo 'Ready: just build'

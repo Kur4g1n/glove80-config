@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>org.glove80.keyboardlayout.glove80</string>
+	<key>CFBundleName</key>
+	<string>Glove80</string>
+	<key>CFBundleVersion</key>
+	<string>4</string>
+	<key>KLInfo_Glove80 Russian</key>
+	<dict>
+		<key>TISInputSourceID</key>
+		<string>org.glove80.inputmethod.Russian</string>
+		<key>TISIntendedLanguage</key>
+		<string>ru</string>
+	</dict>
+</dict>
+</plist>

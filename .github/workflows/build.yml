@@ -1,38 +1,14 @@
 name: Build
 on: [push, pull_request, workflow_dispatch]
-permissions:
-  contents: read
 jobs:
   firmware:
     runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        theme: [qmk, latte, frappe, macchiato, mocha, "macchiato,mocha", "qmk,macchiato", "macchiato,latte,frappe,mocha,qmk"]
-        profile: [standard]
-        include:
-          - theme: macchiato
-            profile: bilingual
-          - theme: "macchiato,qmk"
-            profile: bilingual
     steps:
       - uses: actions/checkout@v4
       - uses: extractions/setup-just@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Validate layout, diagram, and immediate-input behavior
-        run: just check
-      - name: Build both halves with the pinned container and firmware
-        run: python3 scripts/tasks.py build --theme '${{ matrix.theme }}' --profile '${{ matrix.profile }}'
+      - run: just check
+      - run: just build macchiato
       - uses: actions/upload-artifact@v4
         with:
-          name: glove80-firmware-${{ matrix.profile }}-${{ matrix.theme }}
-          path: |
-            build/*.uf2
-            build/*.config
-            firmware.lock.json
-            build/keymap.json
-            build/key-theme.txt
-            build/profile.txt
-            host/
-          if-no-files-found: error
+          name: glove80-firmware
+          path: build/glove80.uf2

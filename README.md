@@ -1,80 +1,50 @@
-# Glove80 installation
+# Glove80 config
 
-[Open the interactive keyboard map](https://kur4g1n.github.io/glove80-config/) — explore all five layers, preview English/Russian and Shift legends, and export a PDF.
+ZMK firmware for a [Glove80](https://www.moergo.com/) with an [Enthium](https://github.com/sunaku/glove80-keymaps) base layer, per-layer key colors in a Catppuccin flavor, and English/Russian ([Statica](https://github.com/mohoaz1348-rgb/statica)) typing on macOS with [Karabiner-Elements](https://karabiner-elements.pqrs.org/). The [interactive diagram](docs/index.html) shows every layer; print it for a PDF.
+
+Everything is generated from `config/`:
+
+| File | Purpose |
+| --- | --- |
+| `layout.json` | Layers as ZMK bindings, one array per physical row |
+| `russian.json` | Cyrillic letter for each Base key |
+| `theme.json` | Key roles → Catppuccin colors, flavors |
+| `geometry.json` | Key positions for the diagram |
+| `behaviors.dtsi` | The few ZMK behaviors the layout refers to (`&magic`, `&lang`, `&bt0`…) |
+
+`just generate` writes `config/glove80.keymap`, `host/` and `docs/layout-data.js`; commit them with the sources.
 
 ## Install
 
-On macOS, install [Homebrew](https://brew.sh), then run from this repository:
-
 ```sh
 brew install just
-just setup
-just doctor
+just setup        # Homebrew tools, Colima/Docker (Nix runs inside the container)
+just install      # Russian input source + Karabiner rule; log out and back in afterwards
+just build        # or: just build mocha  (latte, frappe, macchiato, mocha)
+just flash        # once per half, see below
 ```
 
-Setup installs missing tools and prepares Docker with Colima. Nix runs inside the container. If a C compiler is missing, run `xcode-select --install`. On Linux/WSL, install `just`, Docker, Python 3, Node.js, and a C compiler first.
+After `just install`:
 
-## Build
+1. *System Settings → Keyboard → Text Input*: keep **ABC** and add **Glove80 Russian** (search “Glove80”); remove other sources so Control-Space toggles exactly these two. Turn off *Use Caps Lock to switch to and from ABC*.
+2. Install [Karabiner-Elements](https://karabiner-elements.pqrs.org/) and finish its setup prompts, then in *Complex Modifications → Add predefined rule* enable **Glove80: Statica in Russian; laptop keys stay native**.
 
-```sh
-just check
-just build                 # Macchiato
-# just build macchiato,mocha # Choose palettes in cycle order
-just build-bilingual       # English + Statica; requires the host setup below
-just docs
-```
+Build before entering boot mode; a half in boot mode cannot type. To flash, switch a half off, hold **Magic + C3R3** (the `O` key on the left, `D` on the right), switch it on, and copy `build/glove80.uf2` to the volume that appears (`just flash` does this; `just flash-ready` opens Finder for a mouse-only copy). Flash the right half, then the left. The same file contains both halves. [MoErgo flashing guide](https://docs.moergo.com/glove80-user-guide/customizing-key-layout/#loading-new-zmk-firmware-onto-your-glove80).
 
-View the Macchiato map [online](https://kur4g1n.github.io/glove80-config/), or run `just docs` and open [localhost:8000](http://127.0.0.1:8000) for a local preview. GitHub Pages publishes `docs/` from `main`; commit regenerated documentation after `just generate` to update the online map. Choose firmware palettes from `qmk`, `latte`, `frappe`, `macchiato`, and `mocha`, separated by commas. The first is the default. **Magic → Effect** cycles through the chosen palettes, solid, breathing, spectrum, and swirl, then returns to the first palette. Saved effect preferences survive restarts. `qmk` uses Sunaku’s RGB colors with light Azure (`#99F5FF`) replacing dark teal; use `just build qmk` or mix it with other palettes.
+After the first flash, hold **Magic** and press **Effect** until the keys show their layer colors; the choice is saved on the keyboard. **Magic + C6R4** enters boot mode and **Magic + C6R5** restarts a half. For a factory reset and re-pairing of the halves follow [MoErgo's guide](https://docs.moergo.com/glove80-user-guide/troubleshooting/#configuration-factory-reset-and-re-pairing-left-and-right-halves).
 
-Both halves and the combined `build/glove80.uf2` are generated. `build/key-theme.txt` records the chosen palettes; `build/keymap.json` shows the first palette in MoErgo. Build locally: MoErgo's online builder cannot include the custom module.
+## Layers
 
-Each build also saves a copy in `build/standard/` or `build/bilingual/`. The top-level UF2 is always the **last build**; check `build/profile.txt` before flashing. Both commands accept the same palette choices.
+Hold a layer key for a momentary layer. **Magic + layer key** locks the layer; pressing the layer key again unlocks it. The Magic key is MoErgo's hold-tap: hold for the Magic layer, tap to show the battery/connection status. Bluetooth profiles and USB are on the Magic layer.
 
 ## English and Russian
 
-The standard build works with a US English input layout. The bilingual build adds an adapted [Statica thumb layout](https://github.com/mohoaz1348-rgb/statica/tree/6a3e1a50fddfda463757d758e1c2437296224ef4), with **в** on the right thumb, all 33 Russian letters, and shared Number/Symbol output. The map's **EN/RU** button previews both languages, including Shift and PDF export; it does not switch the computer's language.
+The language is the macOS input source and nothing else: **ABC** for English, **Glove80 Russian** for Russian. **Cursor → EN / RU** sends Control-Space (*Select the previous input source*). The firmware has no language state and the keyboard has none either; Caps Lock is a normal Caps Lock, also reachable by pressing **both Shifts**.
 
-Install the host setup **before flashing the bilingual build**:
+`host/Glove80.bundle` is Apple's Russian – PC letters with US digits and symbols, so the Glove80's Number and Symbol layers are identical in both languages and no modifier is involved. `host/glove80.json` is one Karabiner rule with per-device manipulators:
 
-| System | Setup | Laptop keyboard |
-| --- | --- | --- |
-| macOS | [Karabiner + supplied input layouts](host/README.md#macos) | QWERTY / Russian PC (ЙЦУКЕН); Glove80-only rules activate with Russian |
-| Windows | [AutoHotkey + AutoHotInterception](host/README.md#windows) | Standard English / Russian; automatic Glove80 mapping and Ctrl/Win thumb swap |
-| Linux | [Device-specific XKB layouts](host/README.md#linux) | Existing layout stays assigned to the laptop |
+- Glove80, Russian source: letters are moved to the Statica positions (`config/russian.json`).
+- Glove80, any source: the nine Base keys that hold Cyrillic letters on Enthium punctuation (`= - ' , . ;`, the unused key, and `\ /` → `, .`) are sent as F13–F20 and INT1 so they can mean both; the rule gives them their English characters. Without Karabiner these nine keys type nothing.
+- Built-in keyboard, Russian source: the seven ЙЦУКЕН letters on punctuation keys, the shifted digit row (`"№;%:?`), `/` and `\` are mapped back to their native characters, so the laptop keeps QWERTY / ЙЦУКЕН unchanged.
 
-`just install` detects the host OS and installs its bilingual support files; Windows requires the prepared AutoHotInterception directory as an argument. The guides cover permissions, language switching, flag icons, reconnects, startup, and removal. No host software is installed by `just setup`. The Russian positions live in `config/russian.json`; `just generate` also regenerates host maps.
-
-Finish building **before entering boot mode**. To prepare for flashing with only a mouse on macOS:
-
-```sh
-just flash-ready
-```
-
-This opens Finder at the firmware file and mounted volumes. On other systems, open those locations in the file manager.
-
-## Flash both halves
-
-Connect a USB **data** cable directly to the half being flashed. Start with the **right half**, then repeat for the **left**, using the same combined UF2.
-
-1. Switch the half off. Hold its two boot keys below while switching it on.
-2. Release the keys when its boot volume appears.
-3. Using the mouse, copy `build/glove80.uf2` onto that volume. Wait for copying to finish and the volume to disappear.
-
-| Half | Hold at power-on | Boot volume |
-| --- | --- | --- |
-| Left | `L_C6R6` + `L_C3R3` (Magic + O in this layout) | `GLV80LHBOOT` |
-| Right | `R_C6R6` + `R_C3R3` (Magic + D in this layout) | `GLV80RHBOOT` |
-
-`C6` is the outermost column; rows count from the top. These physical boot keys work regardless of the installed layout. Once installed, **Magic + C6R4** also enters boot mode on that half.
-
-A half in boot mode cannot type. If already there, use the prepared Finder windows to copy firmware with the mouse. To exit without flashing, switch it off and on without holding keys. After flashing, turn both halves on and connect USB to the **left** half for typing. [MoErgo's flashing guide](https://docs.moergo.com/glove80-user-guide/customizing-key-layout/#loading-new-zmk-firmware-onto-your-glove80).
-
-With another keyboard available, `just flash /Volumes/GLV80RHBOOT` copies to an explicitly selected boot volume; repeat with `/Volumes/GLV80LHBOOT` for the left half.
-
-## Restart and reset
-
-**Restart:** switch the half off and on, or press **Magic + C6R5**. Saved settings remain intact.
-
-**Reset settings and pair the halves:** switch both off. Hold `L_C6R6` + `L_C3R2` (Magic + 3), switch the left half on, hold for **5 seconds**, then switch it off. Repeat on the right with `R_C6R6` + `R_C3R2` (Magic + 8). Turn both on together, check both respond, and leave them on for **at least one minute**. This clears saved preferences and Bluetooth pairings, retaining the firmware. [MoErgo's reset guide](https://docs.moergo.com/glove80-user-guide/troubleshooting/#configuration-factory-reset-and-re-pairing-left-and-right-halves).
-
-For Bluetooth, select a green **BT 0–BT 3** key on Magic and pair “Glove80” in the computer's Bluetooth settings. Forget any old pairing after a reset. For USB, connect the left half and select **USB** on Magic.
+Command and Control shortcuts keep their Latin letters in Russian. Edit `config/russian.json` to move letters, then `just generate`, `just install` (re-enable the rule in Karabiner), `just build` and `just flash`.

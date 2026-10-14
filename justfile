@@ -1,53 +1,40 @@
 set positional-arguments
 
-# List available commands.
 default:
     @just --list
 
-# Install missing tools and prepare Docker/Colima and the pinned Nix toolchain.
+# Install build tools with Homebrew and start Colima.
 setup:
     bash scripts/setup.sh
 
-# Check local tools, Docker and pinned firmware inputs.
-doctor:
-    python3 scripts/tasks.py doctor
-
-# Generate firmware, MoErgo JSON and the interactive diagram from the source.
+# Regenerate config/glove80.keymap, host/Glove80.bundle and docs/layout-data.js from config/.
 generate:
-    python3 scripts/layout.py generate
+    python3 scripts/glove80.py generate
 
-# Import an edited MoErgo JSON export, validate it, and regenerate outputs.
-import-layout file:
-    python3 scripts/layout.py import "$1"
-
-# Check generated files and run layout and immediate-input tests.
+# Validate config/, generated files and run the tests.
 check:
-    python3 scripts/tasks.py check
+    python3 scripts/glove80.py check
+    python3 -m unittest discover -s tests
 
-# Build both halves; choose a palette or comma-separated palettes in cycle order.
-build theme="macchiato":
-    python3 scripts/tasks.py build --theme "$1"
+# Build build/glove80.uf2 (both halves) for a Catppuccin flavor: latte, frappe, macchiato, mocha.
+build flavor="macchiato":
+    bash scripts/build.sh "$1"
 
-# Build English/Statica firmware for the device-specific host setup.
-build-bilingual theme="macchiato":
-    python3 scripts/tasks.py build --theme "$1" --profile bilingual
+# Install the Russian input source and the Karabiner rule (log out and back in afterwards).
+install:
+    mkdir -p ~/Library/"Keyboard Layouts" ~/.config/karabiner/assets/complex_modifications
+    rm -rf ~/Library/"Keyboard Layouts"/Glove80.bundle
+    cp -R host/Glove80.bundle ~/Library/"Keyboard Layouts"/
+    cp host/glove80.json ~/.config/karabiner/assets/complex_modifications/
 
-# Install host files for this OS; on Windows, supply the prepared AHI v2 folder.
-install directory="":
-    python3 scripts/tasks.py install --directory "$1"
+# Copy build/glove80.uf2 to the mounted Glove80 bootloader volume.
+flash:
+    bash scripts/flash.sh
 
-# Serve only the interactive diagram on localhost.
-docs port="8000":
-    python3 scripts/tasks.py docs --port "$1"
-
-# Flash the combined firmware to an explicitly selected bootloader volume.
-flash mount:
-    python3 scripts/tasks.py flash "$1"
-
-# Validate firmware and open Finder before the keyboard stops typing in boot mode.
+# Open the firmware folder and /Volumes in Finder for flashing with the mouse.
 flash-ready:
-    python3 scripts/tasks.py flash-ready
+    open build /Volumes
 
-# Validate the firmware and destination without copying anything.
-flash-dry-run mount:
-    python3 scripts/tasks.py flash --dry-run "$1"
+# Serve the interactive layout diagram.
+docs port="8000":
+    python3 -m http.server "$1" --bind 127.0.0.1 --directory docs

@@ -1,3 +1,0 @@
-description: Synchronize the locked layer to both halves for RGB rendering
-compatible: "personal,lock-state"
-include: one_param.yaml
