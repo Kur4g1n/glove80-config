@@ -94,16 +94,19 @@ class Host(unittest.TestCase):
 
 
 class Diagram(unittest.TestCase):
-    def test_russian_legends_only_on_base(self):
-        diagram = LAYOUT.diagram()
-        self.assertEqual(len([k for k in diagram['layers'][0]['keys'] if 'ru' in k]), len(LAYOUT.russian['keys']))
-        self.assertFalse(any('ru' in k for layer in diagram['layers'][1:] for k in layer['keys']))
+    data = LAYOUT.diagram()
+
+    def test_russian_legends_only_on_base_and_inherited_keys(self):
+        en, ru = self.data['languages']['en']['layers'], self.data['languages']['ru']['layers']
+        self.assertEqual(sum(a['label'] != b['label'] for a, b in zip(en[0], ru[0])), len(LAYOUT.russian['keys']))
+        for li in range(1, len(en)):
+            for a, b in zip(en[li], ru[li]):
+                self.assertTrue(a['transparent'] or a['label'] == b['label'])
 
     def test_layer_keys_point_at_existing_layers(self):
-        for layer in LAYOUT.diagram()['layers']:
-            for key in layer['keys']:
-                if 'layer' in key:
-                    self.assertIn(key['layer'], LAYOUT.names)
+        targets = {k['target'] for layer in self.data['layers'] for k in layer if k['target'] is not None}
+        self.assertTrue(targets <= set(range(len(LAYOUT.names))))
+        self.assertIn('layer.locked', self.data['roles'])
 
 
 if __name__ == '__main__':
