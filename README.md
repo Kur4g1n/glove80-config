@@ -6,9 +6,9 @@ Everything is generated from `config/`:
 
 | File | Purpose |
 | --- | --- |
-| `layout.json` | Layers as ZMK bindings, one array per physical row |
+| `layout.json` | Layers as ZMK bindings, one array per physical row; optional per-layer role overrides |
 | `russian.json` | Cyrillic letter for each Base key |
-| `theme.json` | Key roles → Catppuccin colors, flavors |
+| `theme.json` | Key roles → Catppuccin colors, symbol groups, flavors |
 | `geometry.json` | Key positions for the diagram |
 | `behaviors.dtsi` | The few ZMK behaviors the layout refers to (`&magic`, `&lang`, `&bt0`…) |
 

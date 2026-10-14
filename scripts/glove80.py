@@ -134,7 +134,13 @@ class Layout:
         key = self.layers[name][pos]
         if key == '&trans':
             return self.role(self.names[0], pos)
-        return next(role for pattern, role in ROLES if re.fullmatch(pattern, key))
+        if key in self.source.get('roles', {}).get(name, {}):
+            return self.source['roles'][name][key]
+        role = next(role for pattern, role in ROLES if re.fullmatch(pattern, key))
+        if role == 'symbol' and name != self.names[0]:
+            char = self.legend(key)[0]
+            role = next((group for group, chars in self.theme['symbols'].items() if char in chars), role)
+        return role
 
     def colors(self, flavor):
         palette = self.theme['flavors'][flavor]
