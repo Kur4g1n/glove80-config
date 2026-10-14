@@ -17,7 +17,7 @@
      },
      "to": [
       {
-       "key_code": "f19"
+       "key_code": "keypad_7"
       }
      ],
      "conditions": [
@@ -157,7 +157,7 @@
      },
      "to": [
       {
-       "key_code": "f15"
+       "key_code": "keypad_3"
       }
      ],
      "conditions": [
@@ -192,7 +192,7 @@
      },
      "to": [
       {
-       "key_code": "f18"
+       "key_code": "keypad_6"
       }
      ],
      "conditions": [
@@ -262,7 +262,7 @@
      },
      "to": [
       {
-       "key_code": "f17"
+       "key_code": "keypad_5"
       }
      ],
      "conditions": [
@@ -367,7 +367,7 @@
      },
      "to": [
       {
-       "key_code": "f13"
+       "key_code": "keypad_1"
       }
      ],
      "conditions": [
@@ -822,7 +822,7 @@
      },
      "to": [
       {
-       "key_code": "f14"
+       "key_code": "keypad_2"
       }
      ],
      "conditions": [
@@ -857,7 +857,7 @@
      },
      "to": [
       {
-       "key_code": "f16"
+       "key_code": "keypad_4"
       }
      ],
      "conditions": [
@@ -1557,7 +1557,7 @@
      },
      "to": [
       {
-       "key_code": "f13"
+       "key_code": "keypad_1"
       }
      ],
      "conditions": [
@@ -1592,7 +1592,7 @@
      },
      "to": [
       {
-       "key_code": "f14"
+       "key_code": "keypad_2"
       }
      ],
      "conditions": [
@@ -1627,7 +1627,7 @@
      },
      "to": [
       {
-       "key_code": "f15"
+       "key_code": "keypad_3"
       }
      ],
      "conditions": [
@@ -1662,7 +1662,7 @@
      },
      "to": [
       {
-       "key_code": "f16"
+       "key_code": "keypad_4"
       }
      ],
      "conditions": [
@@ -1697,7 +1697,7 @@
      },
      "to": [
       {
-       "key_code": "f17"
+       "key_code": "keypad_5"
       }
      ],
      "conditions": [
@@ -1732,7 +1732,7 @@
      },
      "to": [
       {
-       "key_code": "f18"
+       "key_code": "keypad_6"
       }
      ],
      "conditions": [
@@ -1767,7 +1767,7 @@
      },
      "to": [
       {
-       "key_code": "f19"
+       "key_code": "keypad_7"
       }
      ],
      "conditions": [
@@ -1844,7 +1844,7 @@
      },
      "to": [
       {
-       "key_code": "f20"
+       "key_code": "keypad_8"
       }
      ],
      "conditions": [

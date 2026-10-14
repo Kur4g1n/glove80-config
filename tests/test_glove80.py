@@ -73,7 +73,7 @@ class Host(unittest.TestCase):
         """What the Glove80's keycode becomes on the Russian source, as a character."""
         rule = next(r for r in self.rules if r['from']['key_code'] == source and r['conditions'][0]['type'] == 'device_unless' and r['conditions'][1]['type'] == 'input_source_if')
         mac = {glove80.KARABINER.get(c, c.lower()): m for c, (_, _, m) in glove80.US.items()}
-        mac.update({glove80.KARABINER[c]: m for c, m in glove80.SPARE})
+        mac.update({glove80.KARABINER[c]: m for c, m in glove80.SPARE + glove80.HOST_SPARE})
         return self.maps[''][mac[rule['to'][0]['key_code']]]
 
     def test_glove80_types_statica_in_russian(self):

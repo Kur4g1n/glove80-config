@@ -28,15 +28,18 @@ for code, pair, mac in [('MINUS', '-_', 27), ('EQUAL', '=+', 24), ('LBKT', '[{',
     US[code] = (pair[0], pair[1], mac)
 KARABINER = {'MINUS': 'hyphen', 'EQUAL': 'equal_sign', 'LBKT': 'open_bracket', 'RBKT': 'close_bracket', 'BSLH': 'backslash',
              'SEMI': 'semicolon', 'SQT': 'quote', 'GRAVE': 'grave_accent_and_tilde', 'COMMA': 'comma', 'DOT': 'period', 'FSLH': 'slash',
-             'INT1': 'international1', **{f'F{n}': f'f{n}' for n in range(13, 21)}}
-# Keycodes that mean nothing in stock macOS layouts. The Base layer sends them at positions that hold a Cyrillic
-# letter on a punctuation key, and the Russian keylayout uses them for the seven ЙЦУКЕН letters on punctuation keys.
+             'INT1': 'international1', **{f'F{n}': f'f{n}' for n in range(13, 21)}, **{f'KP_N{n}': f'keypad_{n}' for n in range(10)}}
+# Keycodes the Base layer sends at positions that hold a Cyrillic letter on a punctuation key. They mean nothing to
+# macOS; Karabiner rewrites them in both languages.
 SPARE = [('F13', 105), ('F14', 107), ('F15', 113), ('F16', 106), ('F17', 64), ('F18', 79), ('F19', 80), ('F20', 90), ('INT1', 94)]
+# Keypad digit keycodes carry the seven ЙЦУКЕН letters that sit on punctuation keys, plus №, inside the Russian
+# keylayout. Keypad keys are text keys for macOS; F-keys are not, whatever a keylayout assigns to them.
+HOST_SPARE = [('KP_N1', 83), ('KP_N2', 84), ('KP_N3', 85), ('KP_N4', 86), ('KP_N5', 87), ('KP_N6', 88), ('KP_N7', 89), ('KP_N8', 91)]
 # Apple's Russian – PC letter positions; the laptop keeps them.
 NATIVE = dict(zip('QWERTYUIOP', 'йцукенгшщз'), **dict(zip('ASDFGHJKL', 'фывапролд')), **dict(zip('ZXCVBNM', 'ячсмить')),
               LBKT='х', RBKT='ъ', SEMI='ж', SQT='э', COMMA='б', DOT='ю', GRAVE='ё')
-NATIVE_SPARE = dict(zip(['LBKT', 'RBKT', 'SEMI', 'SQT', 'COMMA', 'DOT', 'GRAVE'], SPARE))
-NUMERO = SPARE[7]  # № for the laptop's Shift-3
+NATIVE_SPARE = dict(zip(['LBKT', 'RBKT', 'SEMI', 'SQT', 'COMMA', 'DOT', 'GRAVE'], HOST_SPARE))
+NUMERO = HOST_SPARE[7]  # № for the laptop's Shift-3
 # Laptop keys whose Russian – PC symbol lives on another US key: (shift held?, key) -> (key, shift?).
 NATIVE_SYMBOLS = {(True, 'N2'): ('SQT', True), (True, 'N3'): (NUMERO[0], False), (True, 'N4'): ('SEMI', False), (True, 'N6'): ('SEMI', True),
                   (True, 'N7'): ('FSLH', True), (False, 'FSLH'): ('DOT', False), (True, 'FSLH'): ('COMMA', False), (True, 'BSLH'): ('FSLH', False)}
