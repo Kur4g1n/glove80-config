@@ -1,6 +1,6 @@
 # Glove80 config
 
-ZMK firmware for a [Glove80](https://www.moergo.com/) with an [Enthium](https://github.com/sunaku/glove80-keymaps) base layer, per-layer key colors in a Catppuccin flavor, and English/Russian ([Statica](https://github.com/mohoaz1348-rgb/statica)) typing on macOS with [Karabiner-Elements](https://karabiner-elements.pqrs.org/). The [interactive diagram](docs/index.html) shows every layer; print it for a PDF.
+ZMK firmware for a [Glove80](https://www.moergo.com/) with an [Enthium](https://github.com/sunaku/glove80-keymaps) base layer, per-layer key colors in a Catppuccin flavor, and English/Russian ([Statica](https://github.com/mohoaz1348-rgb/statica)) typing on macOS with [Karabiner-Elements](https://karabiner-elements.pqrs.org/). The [interactive diagram](docs/index.html) shows every layer and exports a PDF.
 
 Everything is generated from `config/`:
 
