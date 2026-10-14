@@ -82,11 +82,15 @@ class Layout:
         self.layers = {name: flat(rows) for name, rows in self.source['layers'].items()}
         self.labels = [g['label'] for g in self.geometry]
         self.validate()
-        self.spares = {}  # position -> (ZMK keycode, macOS keycode) replacing US punctuation on Base
+        # Base keeps its real US keycodes so English works without any host software. Where Base holds a Cyrillic
+        # letter on a punctuation key, the other layers send a spare keycode for that symbol instead, and an unused
+        # Base key that holds a letter sends a spare too.
         pool = iter(SPARE)
+        self.spares = {}  # punctuation ZMK keycode (or 'none:<pos>') -> (spare ZMK keycode, macOS keycode)
         for pos in self.russian_positions():
-            if not re.fullmatch('&kp [A-Z]', self.layers['Base'][pos]):
-                self.spares[pos] = next(pool, None) or self.fail('Too many Russian letters on non-letter keys; the spare keycode pool is exhausted')
+            key = self.layers['Base'][pos]
+            if not re.fullmatch('&kp [A-Z]', key):
+                self.spares[key[4:] if key != '&none' else f'none:{pos}'] = next(pool, None) or self.fail('Spare keycode pool exhausted')
 
     def fail(self, message):
         raise ValueError(message)
@@ -119,8 +123,11 @@ class Layout:
 
     def firmware_key(self, name, pos):
         key = self.layers[name][pos]
-        if name == self.names[0] and pos in self.spares:
-            return '&kp ' + self.spares[pos][0]
+        if name == self.names[0]:
+            return '&kp ' + self.spares[f'none:{pos}'][0] if f'none:{pos}' in self.spares else key
+        if m := re.fullmatch(r'&kp (LS\()?(\w+)\)?', key):
+            if m[2] in self.spares:
+                return f'&kp LS({self.spares[m[2]][0]})' if m[1] else '&kp ' + self.spares[m[2]][0]
         return key
 
     def role(self, name, pos):
@@ -228,9 +235,11 @@ class Layout:
         rules = []
         for pos, char in zip(self.russian_positions(), self.russian['keys'].values()):
             rules.append(rule(name(self.firmware_key('Base', pos)[4:]), where[char] if char else 'vk_none', [glove80, russian]))
-        for pos, (spare, _) in self.spares.items():
-            key = self.layers['Base'][pos]
-            rules.append(rule(name(spare), name(key[4:]) if key != '&none' else 'vk_none', [glove80, english]))
+        for code, (spare, _) in self.spares.items():
+            if code.startswith('none:'):
+                rules.append(rule(name(spare), 'vk_none', [glove80, english]))
+            else:
+                rules.append(rule(name(spare), name(code), [glove80]))
         for code, (spare, _) in NATIVE_SPARE.items():
             rules.append(rule(name(code), name(spare), [laptop, russian]))
         for (shift, code), (target, to_shift) in NATIVE_SYMBOLS.items():

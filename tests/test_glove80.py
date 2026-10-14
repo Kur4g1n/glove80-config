@@ -34,12 +34,17 @@ class Firmware(unittest.TestCase):
     def test_themes_change_colors(self):
         self.assertNotEqual(LAYOUT.keymap('latte'), LAYOUT.keymap('mocha'))
 
-    def test_spare_keycodes_replace_punctuation_on_base_only(self):
-        base = [LAYOUT.firmware_key('Base', pos) for pos in range(80)]
-        for pos, (code, _) in LAYOUT.spares.items():
-            self.assertEqual(base[pos], '&kp ' + code)
-        other = [LAYOUT.firmware_key(name, pos) for name in LAYOUT.names[1:] for pos in range(80)]
-        self.assertFalse(any(key[4:] in dict(glove80.SPARE) for key in other if key.startswith('&kp ')))
+    def test_base_keeps_real_keycodes_and_other_layers_use_spares(self):
+        spares = dict(glove80.SPARE)
+        for pos in range(80):
+            key = LAYOUT.layers['Base'][pos]
+            self.assertEqual(LAYOUT.firmware_key('Base', pos), key if key != '&none' or f'none:{pos}' not in LAYOUT.spares else '&kp ' + LAYOUT.spares[f'none:{pos}'][0])
+        for name in LAYOUT.names[1:]:
+            for pos in range(80):
+                key = LAYOUT.firmware_key(name, pos)
+                if m := re.fullmatch(r'&kp (?:LS\()?(\w+)\)?', key):
+                    self.assertNotIn(m[1], LAYOUT.spares, (name, pos))
+                    self.assertTrue(m[1] not in spares or LAYOUT.layers[name][pos] != key)
 
     def test_uf2_rejects_garbage(self):
         path = Path(__file__).with_name('garbage.uf2')
@@ -81,11 +86,13 @@ class Host(unittest.TestCase):
             code = LAYOUT.firmware_key('Base', pos)[4:]
             self.assertEqual(self.glove80_in_russian(glove80.KARABINER.get(code, code.lower())), char, code)
 
-    def test_glove80_spares_type_english_punctuation(self):
-        for pos, (spare, _) in LAYOUT.spares.items():
-            rule = next(r for r in self.rules if r['from']['key_code'] == glove80.KARABINER[spare] and r['conditions'][1]['type'] == 'input_source_unless')
-            key = LAYOUT.layers['Base'][pos]
-            self.assertEqual(rule['to'][0]['key_code'], glove80.KARABINER[key[4:]] if key != '&none' else 'vk_none')
+    def test_glove80_spares_type_punctuation_in_both_languages(self):
+        for code, (spare, _) in LAYOUT.spares.items():
+            rule = next(r for r in self.rules if r['from']['key_code'] == glove80.KARABINER[spare] and r['to'][0]['key_code'] != 'keypad_7')
+            if code.startswith('none:'):
+                self.assertEqual((rule['to'][0]['key_code'], rule['conditions'][1]['type']), ('vk_none', 'input_source_unless'))
+            else:
+                self.assertEqual((rule['to'][0]['key_code'], len(rule['conditions'])), (glove80.KARABINER[code], 1))
 
     def test_laptop_rules_only_touch_the_built_in_keyboard(self):
         laptop = [r for r in self.rules if r['conditions'][0]['type'] == 'device_if']

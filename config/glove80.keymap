@@ -38,10 +38,10 @@ macros {
             bindings = <
                 &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10
                 &kp F11  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp F12
-                &kp F13  &kp Q  &kp Y  &kp O  &kp U  &kp F14  &kp X  &kp L  &kp D  &kp P  &kp Z  &none
-                &kp B  &kp C  &kp I  &kp A  &kp E  &kp F15  &kp K  &kp H  &kp T  &kp N  &kp S  &kp W
-                &none  &kp F16  &kp F17  &kp F18  &kp F19  &mo LAYER_Cursor  &kp LSHFT  &kp LGUI  &kp LCTRL  &kp TAB  &kp RGUI  &kp RSHFT  &kp J  &kp M  &kp G  &kp F  &kp V  &none
-                &magic LAYER_Magic 0  &none  &kp F20  &kp INT1  &mo LAYER_Number  &kp SPACE  &kp ESC  &kp LALT  &kp RET  &kp BSPC  &kp R  &mo LAYER_Symbol  &kp LBKT  &kp RBKT  &kp GRAVE  &magic LAYER_Magic 0
+                &kp F13  &kp Q  &kp Y  &kp O  &kp U  &kp EQUAL  &kp X  &kp L  &kp D  &kp P  &kp Z  &none
+                &kp B  &kp C  &kp I  &kp A  &kp E  &kp MINUS  &kp K  &kp H  &kp T  &kp N  &kp S  &kp W
+                &none  &kp SQT  &kp COMMA  &kp DOT  &kp SEMI  &mo LAYER_Cursor  &kp LSHFT  &kp LGUI  &kp LCTRL  &kp TAB  &kp RGUI  &kp RSHFT  &kp J  &kp M  &kp G  &kp F  &kp V  &none
+                &magic LAYER_Magic 0  &none  &kp BSLH  &kp FSLH  &mo LAYER_Number  &kp SPACE  &kp ESC  &kp LALT  &kp RET  &kp BSPC  &kp R  &mo LAYER_Symbol  &kp LBKT  &kp RBKT  &kp GRAVE  &magic LAYER_Magic 0
             >;
         };
         cursor_layer {
@@ -59,22 +59,22 @@ macros {
             label = "Number";
             bindings = <
                 &none  &none  &none  &none  &none  &kp A  &kp B  &kp C  &kp D  &kp E
-                &none  &none  &none  &none  &none  &none  &kp LS(BSLH)  &kp LS(N3)  &kp LS(N4)  &kp LS(N6)  &kp LS(GRAVE)  &kp LS(N1)
-                &none  &none  &none  &none  &none  &none  &kp LS(G)  &kp N7  &kp N8  &kp N9  &kp LS(SEMI)  &kp LS(N5)
-                &none  &none  &none  &none  &none  &none  &kp K  &kp N4  &kp N5  &kp N6  &kp MINUS  &kp LS(EQUAL)
-                &none  &none  &none  &none  &none  &none  &trans  &trans  &trans  &kp LS(COMMA)  &kp EQUAL  &kp COMMA  &kp J  &kp N1  &kp N2  &kp N3  &kp FSLH  &kp LS(N8)
-                &trans  &none  &none  &none  &tog LAYER_Number  &trans  &trans  &trans  &kp LS(DOT)  &kp DOT  &kp N0  &kp LS(N9)  &kp LBKT  &kp RBKT  &kp LS(N0)  &trans
+                &none  &none  &none  &none  &none  &none  &kp LS(F20)  &kp LS(N3)  &kp LS(N4)  &kp LS(N6)  &kp LS(GRAVE)  &kp LS(N1)
+                &none  &none  &none  &none  &none  &none  &kp LS(G)  &kp N7  &kp N8  &kp N9  &kp LS(F19)  &kp LS(N5)
+                &none  &none  &none  &none  &none  &none  &kp K  &kp N4  &kp N5  &kp N6  &kp F15  &kp LS(F14)
+                &none  &none  &none  &none  &none  &none  &trans  &trans  &trans  &kp LS(F17)  &kp F14  &kp F17  &kp J  &kp N1  &kp N2  &kp N3  &kp INT1  &kp LS(N8)
+                &trans  &none  &none  &none  &tog LAYER_Number  &trans  &trans  &trans  &kp LS(F18)  &kp F18  &kp N0  &kp LS(N9)  &kp LBKT  &kp RBKT  &kp LS(N0)  &trans
             >;
         };
         symbol_layer {
             label = "Symbol";
             bindings = <
                 &none  &none  &none  &none  &none  &none  &none  &none  &none  &none
-                &none  &kp GRAVE  &kp LS(N9)  &kp LS(N0)  &kp SEMI  &kp COMMA  &none  &none  &none  &none  &none  &none
-                &kp LS(N1)  &kp LBKT  &kp LS(LBKT)  &kp LS(RBKT)  &kp RBKT  &kp LS(FSLH)  &none  &none  &none  &none  &none  &none
-                &kp LS(N3)  &kp LS(N6)  &kp EQUAL  &kp LS(MINUS)  &kp LS(N4)  &kp LS(N8)  &none  &none  &none  &none  &none  &none
-                &kp LS(GRAVE)  &kp LS(COMMA)  &kp LS(BSLH)  &kp MINUS  &kp LS(DOT)  &kp FSLH  &kp BSLH  &kp DOT  &kp LS(N8)  &trans  &trans  &trans  &none  &none  &none  &none  &none  &none
-                &trans  &kp LS(N7)  &kp SQT  &kp LS(SQT)  &kp LS(EQUAL)  &kp LS(N5)  &kp LS(SEMI)  &kp LS(N2)  &trans  &trans  &trans  &tog LAYER_Symbol  &none  &none  &none  &trans
+                &none  &kp GRAVE  &kp LS(N9)  &kp LS(N0)  &kp F19  &kp F17  &none  &none  &none  &none  &none  &none
+                &kp LS(N1)  &kp LBKT  &kp LS(LBKT)  &kp LS(RBKT)  &kp RBKT  &kp LS(INT1)  &none  &none  &none  &none  &none  &none
+                &kp LS(N3)  &kp LS(N6)  &kp F14  &kp LS(F15)  &kp LS(N4)  &kp LS(N8)  &none  &none  &none  &none  &none  &none
+                &kp LS(GRAVE)  &kp LS(F17)  &kp LS(F20)  &kp F15  &kp LS(F18)  &kp INT1  &kp F20  &kp F18  &kp LS(N8)  &trans  &trans  &trans  &none  &none  &none  &none  &none  &none
+                &trans  &kp LS(N7)  &kp F16  &kp LS(F16)  &kp LS(F14)  &kp LS(N5)  &kp LS(F19)  &kp LS(N2)  &trans  &trans  &trans  &tog LAYER_Symbol  &none  &none  &none  &trans
             >;
         };
         magic_layer {

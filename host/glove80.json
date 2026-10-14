@@ -182,7 +182,7 @@
     {
      "type": "basic",
      "from": {
-      "key_code": "f14",
+      "key_code": "equal_sign",
       "modifiers": {
        "optional": [
         "shift",
@@ -567,7 +567,7 @@
     {
      "type": "basic",
      "from": {
-      "key_code": "f15",
+      "key_code": "hyphen",
       "modifiers": {
        "optional": [
         "shift",
@@ -812,7 +812,7 @@
     {
      "type": "basic",
      "from": {
-      "key_code": "f16",
+      "key_code": "quote",
       "modifiers": {
        "optional": [
         "shift",
@@ -847,7 +847,7 @@
     {
      "type": "basic",
      "from": {
-      "key_code": "f17",
+      "key_code": "comma",
       "modifiers": {
        "optional": [
         "shift",
@@ -882,7 +882,7 @@
     {
      "type": "basic",
      "from": {
-      "key_code": "f18",
+      "key_code": "period",
       "modifiers": {
        "optional": [
         "shift",
@@ -917,7 +917,7 @@
     {
      "type": "basic",
      "from": {
-      "key_code": "f19",
+      "key_code": "semicolon",
       "modifiers": {
        "optional": [
         "shift",
@@ -1162,7 +1162,7 @@
     {
      "type": "basic",
      "from": {
-      "key_code": "f20",
+      "key_code": "backslash",
       "modifiers": {
        "optional": [
         "shift",
@@ -1197,7 +1197,7 @@
     {
      "type": "basic",
      "from": {
-      "key_code": "international1",
+      "key_code": "slash",
       "modifiers": {
        "optional": [
         "shift",
@@ -1288,14 +1288,6 @@
          "is_built_in_keyboard": true
         }
        ]
-      },
-      {
-       "type": "input_source_unless",
-       "input_sources": [
-        {
-         "input_source_id": "^org\\.glove80\\.inputmethod\\.Russian$"
-        }
-       ]
       }
      ]
     },
@@ -1321,14 +1313,6 @@
        "identifiers": [
         {
          "is_built_in_keyboard": true
-        }
-       ]
-      },
-      {
-       "type": "input_source_unless",
-       "input_sources": [
-        {
-         "input_source_id": "^org\\.glove80\\.inputmethod\\.Russian$"
         }
        ]
       }
@@ -1358,14 +1342,6 @@
          "is_built_in_keyboard": true
         }
        ]
-      },
-      {
-       "type": "input_source_unless",
-       "input_sources": [
-        {
-         "input_source_id": "^org\\.glove80\\.inputmethod\\.Russian$"
-        }
-       ]
       }
      ]
     },
@@ -1391,14 +1367,6 @@
        "identifiers": [
         {
          "is_built_in_keyboard": true
-        }
-       ]
-      },
-      {
-       "type": "input_source_unless",
-       "input_sources": [
-        {
-         "input_source_id": "^org\\.glove80\\.inputmethod\\.Russian$"
         }
        ]
       }
@@ -1428,14 +1396,6 @@
          "is_built_in_keyboard": true
         }
        ]
-      },
-      {
-       "type": "input_source_unless",
-       "input_sources": [
-        {
-         "input_source_id": "^org\\.glove80\\.inputmethod\\.Russian$"
-        }
-       ]
       }
      ]
     },
@@ -1461,14 +1421,6 @@
        "identifiers": [
         {
          "is_built_in_keyboard": true
-        }
-       ]
-      },
-      {
-       "type": "input_source_unless",
-       "input_sources": [
-        {
-         "input_source_id": "^org\\.glove80\\.inputmethod\\.Russian$"
         }
        ]
       }
@@ -1498,14 +1450,6 @@
          "is_built_in_keyboard": true
         }
        ]
-      },
-      {
-       "type": "input_source_unless",
-       "input_sources": [
-        {
-         "input_source_id": "^org\\.glove80\\.inputmethod\\.Russian$"
-        }
-       ]
       }
      ]
     },
@@ -1531,14 +1475,6 @@
        "identifiers": [
         {
          "is_built_in_keyboard": true
-        }
-       ]
-      },
-      {
-       "type": "input_source_unless",
-       "input_sources": [
-        {
-         "input_source_id": "^org\\.glove80\\.inputmethod\\.Russian$"
         }
        ]
       }
